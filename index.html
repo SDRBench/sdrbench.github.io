@@ -1,93 +1,238 @@
 <!DOCTYPE html>
 <html>
 <body>
-Scientific Data Reduction Benchmarks
- 
-Comparison between scientific data reduction (including compression) techniques needs a rigorous and consistent methodology. This site provides scientific datasets, metrics, data reduction techniques and comparison results to assess and compare fairly the performance of scientific data reduction techniques.
- 
-Data sets:
- 
-Name
-Type
-Format
-Size (data)
-Link
-CESM-ATM
-Climate simulation,
-5 fields
-2D, 1800 x 3600, single precision, binary
-100 MB
-here
- 
-EXAALT
- 
- 
-60 MB
-here
-EXAFEL
-Images from LCLS
-2D,
-Single precision
-HDF5 and binary
-150 MB
- 
-HACC
-Particle simulation (Cosmology)
-6 fields
-500 snapshots,
-1D,
-Single precision,
-Binary little-endian
-7 GB
-here
-NYX
-Particle simulation (Cosmology)
-6 fields
-3D, 512 x 512 x 512
-Single precision,
-Binary, Little-endian
-200MB
-here
-NWChem
- 
- 
-17GB
-here
-QMCPACK
-Many-body ab initio Quantum Monte Carlo (electronic structure of atoms, molecules, and solids)
-4D, 115 x 69 x 69 x 288
-Single precision and
-Binary, Little endian
-1.2 GB
-here
-S3D
-Combustion simulation,
-11 fields
-4D, 500x500x500x11
-Double precision
-Binary, Little-endian
- 
-here
-SCALE-LETKF
- 
- 
- 
- 
-XGC
-Fusion Simulation
- 
-150MB
-here
-Brown Samples
-Synthetic, generated to specified regularity
-1D, 8388609
-Double precision
-Binary, Little-endian
-2GB
-here
- 
-Others: please submit your proposal of datasets to cappello (at) anl.gov. Requirements: datasets will be open to public access, dataset should be link to a simulation application or a scientific instrument, metadata should explain the origin of the dataset and how it has been produced (what simulation, what instrument, what settings). Upon review by the SDRBenchmark committee, the dataset will (or will not) be added to the SDR benchmark repository.
-
+<h1 id="docs-internal-guid-bb94d3ae-23ad-eff8-de43-fa7cbe399423" dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; line-height: 1.38; margin-top: 24pt; margin-bottom: 6pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; color: #0070c0; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Scientific Data Reduction Benchmarks</span></h1>
+<p dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+<p dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Comparison between scientific data reduction (including compression) techniques needs a rigorous and consistent methodology. This site provides scientific datasets, metrics, data reduction techniques and comparison results to assess and compare fairly the performance of scientific data reduction techniques.</span></p>
+<p dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;">&nbsp;</p>
+<p dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;"><span style="font-size: 12pt; font-family: Arial; color: #0070c0; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Data sets:</span></p>
+<p dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;">&nbsp;</p>
+<div dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; margin-left: 0pt;">
+<table style="border: none;"><colgroup><col width="115" /><col width="150" /><col width="187" /><col width="85" /><col width="64" /></colgroup>
+<tbody>
+<tr style="height: 55pt;">
+<td style="border-width: 1pt 1pt 1.5pt; border-color: #b4c6e7 #b4c6e7 #8eaadb; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; color: #0070c0; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Name</span></p>
+</td>
+<td style="border-width: 1pt 1pt 1.5pt; border-color: #b4c6e7 #b4c6e7 #8eaadb; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; color: #0070c0; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Type</span></p>
+</td>
+<td style="border-width: 1pt 1pt 1.5pt; border-color: #b4c6e7 #b4c6e7 #8eaadb; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; color: #0070c0; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Format</span></p>
+</td>
+<td style="border-width: 1pt 1pt 1.5pt; border-color: #b4c6e7 #b4c6e7 #8eaadb; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; color: #0070c0; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Size (data)</span></p>
+</td>
+<td style="border-width: 1pt 1pt 1.5pt; border-color: #b4c6e7 #b4c6e7 #8eaadb; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; color: #0070c0; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Link</span></p>
+</td>
+</tr>
+<tr style="height: 77pt;">
+<td style="border-width: 1.5pt 1pt 1pt; border-color: #8eaadb #b4c6e7 #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">CESM-ATM</span></p>
+</td>
+<td style="border-width: 1.5pt 1pt 1pt; border-color: #8eaadb #b4c6e7 #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Climate simulation,</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">5 fields</span></p>
+</td>
+<td style="border-width: 1.5pt 1pt 1pt; border-color: #8eaadb #b4c6e7 #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">2D, 1800 x 3600, single precision, binary</span></p>
+</td>
+<td style="border-width: 1.5pt 1pt 1pt; border-color: #8eaadb #b4c6e7 #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">100 MB</span></p>
+</td>
+<td style="border-width: 1.5pt 1pt 1pt; border-color: #8eaadb #b4c6e7 #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">here</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;">&nbsp;</p>
+</td>
+</tr>
+<tr style="height: 33pt;">
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">EXAALT</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">60 MB</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">here</span></p>
+</td>
+</tr>
+<tr style="height: 77pt;">
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">EXAFEL</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Images from LCLS</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">2D,</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Single precision</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">HDF5 and binary</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">150 MB</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+</tr>
+<tr style="height: 121pt;">
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">HACC</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Particle simulation (Cosmology)</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">6 fields</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">500 snapshots,</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">1D,</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Single precision,</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Binary little-endian</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">7 GB</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">here</span></p>
+</td>
+</tr>
+<tr style="height: 121pt;">
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">NYX</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Particle simulation (Cosmology)</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">6 fields</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">3D, 512 x 512 x 512</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Single precision,</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Binary, Little-endian</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">200MB</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">here</span></p>
+</td>
+</tr>
+<tr style="height: 33pt;">
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">NWChem</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">17GB</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">here</span></p>
+</td>
+</tr>
+<tr style="height: 210pt;">
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">QMCPACK</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Many-body ab initio Quantum Monte Carlo (electronic structure of atoms, molecules, and solids)</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">4D, 115 x 69 x 69 x 288</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Single precision and</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Binary, Little endian</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">1.2 GB</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">here</span></p>
+</td>
+</tr>
+<tr style="height: 121pt;">
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">S3D</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Combustion simulation,</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">11 fields</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">4D, 500x500x500x11</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Double precision</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Binary, Little-endian</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">here</span></p>
+</td>
+</tr>
+<tr style="height: 55pt;">
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">SCALE-LETKF</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+</tr>
+<tr style="height: 55pt;">
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">XGC</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Fusion Simulation</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">&nbsp;</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">150MB</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">here</span></p>
+</td>
+</tr>
+<tr style="height: 99pt;">
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Brown Samples</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Synthetic, generated to specified regularity</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">1D, 8388609</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Double precision</span></p>
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Binary, Little-endian</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">2GB</span></p>
+</td>
+<td style="border-width: 1pt; border-color: #b4c6e7; vertical-align: top; padding: 5pt;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: center;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">here</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;">&nbsp;</p>
+<p dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;"><span style="font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Others: please submit your proposal of datasets to cappello (at) anl.gov. Requirements: datasets will be open to public access, dataset should be link to a simulation application or a scientific instrument, metadata should explain the origin of the dataset and how it has been produced (what simulation, what instrument, what settings). Upon review by the SDRBenchmark committee, the dataset will (or will not) be added to the SDR benchmark repository.</span></p>
+<p>&nbsp;</p>
+<p dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;"><span style="font-size: 12pt; font-family: Arial; color: #0070c0; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Compressors:</span></p>
+<ul style="caret-color: #000000; color: #000000; font-family: -webkit-standard; margin-top: 0pt; margin-bottom: 0pt;">
+<li dir="ltr" style="list-style-type: disc; font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;"><span style="font-size: 12pt; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">SZ: </span><a style="text-decoration: none;" href="https://github.com/disheng222/SZ"><span style="font-size: 12pt; color: #1155cc; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; text-decoration: underline; -webkit-text-decoration-skip: none; vertical-align: baseline; white-space: pre-wrap;">https://github.com/disheng222/SZ</span></a></p>
+</li>
+<li dir="ltr" style="list-style-type: disc; font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;"><span style="font-size: 12pt; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">ZFP: </span><a style="text-decoration: none;" href="https://github.com/LLNL/zfp"><span style="font-size: 12pt; color: #1155cc; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; text-decoration: underline; -webkit-text-decoration-skip: none; vertical-align: baseline; white-space: pre-wrap;">https://github.com/LLNL/zfp</span></a></p>
+</li>
+<li dir="ltr" style="list-style-type: disc; font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;"><span style="font-size: 12pt; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">MGUARD: soon</span></p>
+</li>
+<li dir="ltr" style="list-style-type: disc; font-size: 12pt; font-family: Arial; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre;">
+<p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;"><span style="font-size: 12pt; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Others: please submit your suggestion of compressor, with github link to cappello (at) anl.gov</span></p>
+</li>
+</ul>
+<p><br style="caret-color: #000000; color: #000000; font-family: -webkit-standard;" /><br style="caret-color: #000000; color: #000000; font-family: -webkit-standard;" /></p>
+<p dir="ltr" style="caret-color: #000000; color: #000000; font-family: -webkit-standard; line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt; text-align: justify;"><span style="font-size: 12pt; font-family: Arial; color: #0070c0; background-color: transparent; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; vertical-align: baseline; white-space: pre-wrap;">Sponsors:</span></p>
 </body>
 </html>
 
