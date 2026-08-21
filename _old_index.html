@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 24.8.7.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2026-08-13T23:47:18.132171502"/>
+	<meta name="Originator" content="Microsoft Word 15"/>
+	<meta name="ProgId" content="Word.Document"/>
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<style type="text/css">
+		@page { margin: 0.79in }
+		td p { color: #000000 }
+		h1 { color: #000000 }
+		p { color: #000000 }
+		a:link { color: #0000ff }
+		a:visited { color: #800080 }
+	</style>
+</head>
+<body lang="en-US" text="#000000" link="#0000ff" vlink="#800080" dir="ltr"><h1 align="center" style="line-height: 115%; margin-top: 0.33in; page-break-before: auto; page-break-after: auto">
+<font color="#0070c0"><font size="6" style="font-size: 24pt">Scientific
+Data Reduction Benchmarks</font></font></h1>
+<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt"><i>This
+site has been established as part of the </i></font><a href="https://www.exascaleproject.org/"><font color="#1155cc"><font size="3" style="font-size: 12pt"><i>ECP</i></font></font></a>
+<a href="https://www.exascaleproject.org/project/codar-co-design-center-online-data-analysis-reduction-exascale/"><font color="#1155cc"><font size="3" style="font-size: 12pt"><i>CODAR</i></font></font></a>
+<font size="3" style="font-size: 12pt"><i>project.</i></font></p>
+<p style="line-height: 115%">&nbsp;</p>
+<p style="line-height: 115%; text-indent: -0.31in; margin-left: 0.63in">
+<font size="3" style="font-size: 12pt">This site provides reference
+scientific datasets, data reduction techniques, error metrics, error
+controls and error assessment tools for users and developers of
+scientific data reduction techniques.&nbsp; </font>
+</p>
+<p style="line-height: 115%; text-indent: -0.31in; margin-left: 0.63in">
+&nbsp;</p>
+<p style="line-height: 115%; text-indent: -0.31in; margin-left: 0.63in">
+<font size="3" style="font-size: 12pt"><i><b>Important: when
+publishing results from one or more datasets presented in this
+webpage, please</b></i></font><font size="3" style="font-size: 12pt"><b>:
+</b></font>
+</p>
+<p style="line-height: 115%; text-indent: -0.31in; margin-left: 0.63in">
+●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt"><i><b>Cite</b></i></font><font size="3" style="font-size: 12pt"><i>:</i></font>
+<font size="3" style="font-size: 12pt">SDRBench:
+</font><font size="3" style="font-size: 12pt"><i>https://sdrbench.github.io</i></font></p>
+<p style="line-height: 115%; text-indent: -0.31in; margin-left: 0.63in">
+●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt"><i><b>Please also cite</b></i></font><font size="3" style="font-size: 12pt"><i>:
+</i></font><font size="3" style="font-size: 12pt">K. Zhao, S. Di, X.
+Liang, S. Li, D. Tao, J. Bessac, Z. Chen, and F. Cappello, “SDRBench:
+Scientific Data Reduction Benchmark for Lossy Compressors”,
+International Workshop on Big Data Reduction (IWBDR2020), in
+conjunction with IEEE Bigdata20.</font></p>
+<p style="line-height: 115%; text-indent: -0.31in; margin-left: 0.63in">
+●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt"><i><b>Acknowledge</b></i></font><font size="3" style="font-size: 12pt">:
+the source of the dataset you used, the DOE NNSA ECP project, and the
+ECP CODAR project.</font></p>
+<p style="line-height: 115%; text-indent: -0.31in; margin-left: 0.63in">
+●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt"><i><b>Check</b></i></font><font size="3" style="font-size: 12pt"><i>:
+</i></font><font size="3" style="font-size: 12pt">the condition of
+publications (some dataset sources request prior check)</font></p>
+<p style="line-height: 115%; text-indent: -0.31in; margin-left: 0.63in">
+●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt"><i><b>Contact</b></i></font><font size="3" style="font-size: 12pt"><i>:
+</i></font><font size="3" style="font-size: 12pt">the compressor
+authors to get the correct compressor configuration according to each
+dataset and each comparison metrics.</font></p>
+<p style="line-height: 115%; text-indent: -0.31in; margin-left: 0.63in">
+●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt"><i><b>Dimension</b></i></font><font size="3" style="font-size: 12pt">:
+the order of the dimensions shown in the 'Format' column of the table
+is in row-major order (aka. C order), which is consistent with
+well-known I/O libraries such as HDF5. For example, for the CESM-ATM
+dataset (1800 x 3600), 1800 is higher dimension (changing slower) and
+3600 is lower dimension (changing faster). For most compressors (such
+as SZ, ZFP and FPZIP), the dimensions should be given in the reverse
+order (such as -2 3600 1800) for their executables. If you are not
+sure about the order of dimension, one simple method is trying
+different dimension orders and selecting the results with highest
+compression ratios.</font></p>
+<p style="line-height: 115%">&nbsp;</p>
+<p lang="fr-FR" align="center" style="line-height: 115%; text-indent: -0.31in; margin-left: 0.63in">
+<font color="#0070c0"><font size="5" style="font-size: 18pt">Data
+sets:</font></font></p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<center>
+	<table width="1052" cellpadding="2" cellspacing="0">
+		<col width="185"/>
+		<col width="113"/>
+		<col width="290"/>
+		<col width="103"/>
+		<col width="212"/>
+		<col width="123"/>
+		<tr valign="top">
+			<td width="185" style="border: 1.00pt solid #0070c0; padding: 0.02in"><p lang="fr-FR" align="center">
+				<font color="#0070c0"><font size="3" style="font-size: 12pt">Name</font></font></p>
+			</td>
+			<td width="113" style="border-top: 1.00pt solid #0070c0; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+				<font color="#0070c0"><font size="3" style="font-size: 12pt">Type</font></font></p>
+			</td>
+			<td width="290" style="border-top: 1.00pt solid #0070c0; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+				<font color="#0070c0"><font size="3" style="font-size: 12pt">Format</font></font></p>
+			</td>
+			<td width="103" style="border-top: 1.00pt solid #0070c0; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+				<font color="#0070c0"><font size="3" style="font-size: 12pt">Size
+				(data)</font></font></p>
+			</td>
+			<td width="212" style="border-top: 1.00pt solid #0070c0; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+				<font color="#0070c0"><font size="3" style="font-size: 12pt">Command
+				Examples</font></font></p>
+			</td>
+			<td width="123" style="border-top: 1.00pt solid #0070c0; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+				<font color="#0070c0"><font size="3" style="font-size: 12pt">Link</font></font></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+				<font size="3" style="font-size: 12pt">CESM-ATM</font></p>
+				<p align="center"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center"><font color="#222222"><font size="2" style="font-size: 9pt"><i><span style="background: #ffffff">Mark
+				Taylor (SNL)</span></i></font></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+				<font size="3" style="font-size: 12pt"><span lang="fr-FR">Climate</span></font>
+				<font size="3" style="font-size: 12pt"><span lang="fr-FR">simulation</span></font></p>
+				<p align="center">&nbsp;</p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+				<font size="3" style="font-size: 12pt">Dataset1 : 79 fields: 2D,
+				1800 x 3600 ;</font></p>
+				<p align="center"><font size="3" style="font-size: 12pt">Dataset2
+				: 1 field :</font></p>
+				<p align="center"><font size="3" style="font-size: 12pt">3D,
+				26x1800x3600.</font></p>
+				<p align="center"><font size="3" style="font-size: 12pt">Both are
+				single precision, binary</font></p>
+				<p align="center">&nbsp;</p>
+				<center>
+					<table width="280" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="58" style="border: 1.00pt solid #000000; padding: 0.02in"><p align="center">
+								&nbsp;</p>
+							</td>
+							<td width="102" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">6.5</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">19.8</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">1.5</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">2.3</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.8</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">22.6</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p><br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Dataset1 (raw): 1.47GB</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Dataset1
+				(cleared): 1.47GB</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Dataset2:
+				17GB</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">(cleared
+				data zeroed all background data)</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -z -f -i CLDHGH_1_1800_3600.f32 -M REL -R 1E-2 -2 3600 1800&nbsp;</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -x -f -i CLDHGH_1_1800_3600.f32 -2 3600 1800 -s
+				CLDHGH_1_1800_3600.f32.sz -a</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -f -i CLDHGH_1_1800_3600.f32 -z CLDHGH_1_1800_3600.f32.zfp -o
+				CLDHGH_1_1800_3600.f32.zfp.out -2 3600 1800 -a 1E-2 -s</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i CLDHGH_1_1800_3600.f32 -d 3600 -d 1800 -t
+				float -o rel=1e-2&nbsp; -m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p>&nbsp;</p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:&nbsp;
+				./runZCCase.sh -f REL CESM-ATM raw-data-dir f32 3600 1800</font></font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-1800x3600.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset1
+				(raw)</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-cleared-1800x3600.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset1
+				(cleared)</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-26x1800x3600.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset2
+				(raw)</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+				<p align="center">&nbsp;</p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-cleared-1800x3600-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset1’s
+				property</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-26x1800x3600-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset2’s
+				property</font></font></a></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">EXAALT</font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center" style="line-height: 115%"><font color="#222222"><font size="2" style="font-size: 9pt"><i><span style="background: #ffffff">EXAALT
+				team</span></i></font></font></p>
+				<p align="center" style="line-height: 115%"><font color="#222222"><font size="2" style="font-size: 9pt"><i><span style="background: #ffffff">This
+				dataset has been approved for unlimited release by Los Alamos
+				National Laboratory and has been assigned LA-UR-18-25670.</span></i></font></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt"><span lang="fr-FR"><span style="background: #ffffff">Molecular</span></span></font><span style="background: #ffffff">
+				</span><font size="3" style="font-size: 12pt"><span lang="fr-FR"><span style="background: #ffffff">dynamics
+				simulation</span></span></font> 
+				</p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">6 fields: x,y,z,vx,vy,vz,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Each
+				field stored separately,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Single
+				precision,</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Binary,
+				Little-endian</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<center>
+					<table width="280" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="58" style="border: 1.00pt solid #000000; padding: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">Data1</font></p>
+							</td>
+							<td width="102" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.3</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">19.9</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">18.4</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.4</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">20.4</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">Data2</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">6.7</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">15.4</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">6</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">9.40</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.1</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">20.1</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">Data3</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">6.9</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">16.3</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">6.8</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">15.6</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.2</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">17.6</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p><br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Dataset1:</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;<font size="3" style="font-size: 12pt">60
+				MB</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Dataset2:
+				</font>
+				</p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">973
+				MB</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Dataset3:</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">2.4
+				GB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -z -f -i xx.f32 -M REL -R 1E-2 -1 2869440</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -x -f -i xx.f32 -1 2869440 -s xx.f32.sz -a</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -f -i xx.f32 -z xx.f32.zfp -o xx.f32.zfp.out -1 2869440 -a
+				1E-2 -s</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i xx.f32 -d 2869440 -t float -o rel=1e-2&nbsp;
+				-m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><br/>
+<font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -f REL EXAALT raw-data-dir f32 2869440</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset1</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440-template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata1</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Property1</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-copper.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset2</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-copper-template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata2</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-copper-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Property2</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-helium.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset
+				3</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-helium-template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata3</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-helium-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Property3</font></font></a></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center" style="line-height: 115%; orphans: 1">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Hurricane
+				ISABEL</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center" style="line-height: 115%"><a href="http://vis.computer.org/vis2004contest/data.html"><font size="2" style="font-size: 10pt"><span lang="fr-FR"><i>http://vis.computer.org/
+				vis2004contest/data.html</i></span></font></a></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%; orphans: 1">
+				<span style="background: #ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</span>
+				</p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt"><span lang="fr-FR"><span style="background: #ffffff">Weather</span></span></font><span style="background: #ffffff">
+				</span><font size="3" style="font-size: 12pt"><span lang="fr-FR"><span style="background: #ffffff">simulation</span></span></font></p>
+				<p align="center" style="line-height: 115%"><span style="background: #ffffff">&nbsp;</span></p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">13 fields: 3D,
+				100x500x500, single-precision, binary (cleared dataset by
+				replacing background by 0)</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<center>
+					<table width="280" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="58" style="border: 1.00pt solid #000000; padding: 0.02in"><p align="center">
+								&nbsp;</p>
+							</td>
+							<td width="102" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">5.9</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">18.9</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">0.7</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">1.3</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">7.5</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">24.2</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p><br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%; orphans: 1">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">1.25GB</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -z -f -i Pf48.bin.f32 -M REL -R 1E-2 -3 500 500 100</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -x -f -i Pf48.bin.f32 -3 500 500 100 -s Pf48.bin.f32.sz -a</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -f -i Pf48.bin.f32 -3 500 500 100 -z Pf48.bin.f32.zfp -o
+				Pf48.bin.f32.zfp.out -a 1E-2 -s</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i Pf48.bin.f32 -d 500 -d 500 -d 100&nbsp; -t
+				float -o rel=1e-2&nbsp; -m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -f REL Hurricane raw-data-dir f32 500 500 100</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%; orphans: 1">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+				<p align="center"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-property.txt"><font color="#1155cc">Property</font></a></p>
+				<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">EXAFEL</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt"><i>LCLS</i></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Images from the LCLS
+				instrument</font></p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">1 field: 2D,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Single
+				precision</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">HDF5
+				and binary</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<center>
+					<table width="222" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="102" style="border: 1.00pt solid #000000; padding: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.4</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">25.7</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p><br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="margin-bottom: 0in">
+				<font face="Arial, sans-serif">51 MB,&nbsp;</font></p>
+				<p align="center" style="margin-bottom: 0in"><font face="Arial, sans-serif">8.5
+				GB, </font>
+				</p>
+				<p align="center" style="margin-bottom: 0in"><font face="Arial, sans-serif">1GB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -z -f -i EXAFEL-LCLS-986x32x185x388.f32 -M REL -R 1E-2 -2 388
+				5837120</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -x -f -i EXAFEL-LCLS-986x32x185x388.f32 -s
+				EXAFEL-LCLS-986x32x185x388.f32.sz -2 388 5837120 -a</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -f -a 1E-2 -i EXAFEL-LCLS-986x32x185x388.f32 -z
+				EXAFEL-LCLS-986x32x185x388.f32.zfp -o
+				EXAFEL-LCLS-986x32x185x388.f32.zfp.out -2 388 5837120 -s</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i EXAFEL-LCLS-986x32x185x388.f32 -d 5837120 -d
+				388&nbsp; -t float -o rel=1e-2&nbsp; -m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><br/>
+<font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -f REL EXAFEL raw-data-dir f32 388 5837120</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-10x32x185x388.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset1</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-986x32x185x388.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset2</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+				<p align="center"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-986x32x185x388-property.txt"><font color="#1155cc">Property</font></a></p>
+				<p align="center" style="text-decoration: none"><font color="#1155cc">&nbsp;</font></p>
+				<p align="center" style="margin-bottom: 0in"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-130x1480x1552.tar.gz"><font color="#1155cc"><font face="Arial, sans-serif">Dataset3</font></font></a></p>
+				<p align="center" style="margin-top: 0.16in; margin-bottom: 0in"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/template_data-exafel-130x1480x1552.txt"><font color="#1155cc"><font face="Arial, sans-serif">Metadata</font></font></a></p>
+				<p align="center">&nbsp;</p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">HACC</font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:
+				</i></font>
+				</p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>HACC
+				team </i></font>
+				</p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>(ECP
+				EXASKY)</i></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Cosmology:</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt"><span lang="fr-FR">particle</span></font>
+				<font size="3" style="font-size: 12pt"><span lang="fr-FR">simulation</span></font></p>
+				<p style="line-height: 115%">&nbsp;</p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">1 snapshot: 6 fields
+				x,y,z,vx,vy,vz)</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Each
+				field stored separately,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Single
+				precision,</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Binary,
+				Little-endian</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<center>
+					<table width="280" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="58" style="border: 1.00pt solid #000000; padding: 0.02in"><p align="center">
+								&nbsp;</p>
+							</td>
+							<td width="102" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.2</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">25.3</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.1</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">24.7</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.4</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">25.9</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p><br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">19 GB</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">5
+				GB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -z -f -i xx.f32 -M ABS -A 0.003 -1 1073726487</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -x -f -i xx.f32 -s xx.f32.sz -1 1073726487 -a</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -f -i xx.f32 -z xx.f32.zfp -o xx.f32.zfp.out -a 0.003 -1
+				1073726487</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i xx.f32 -d 1073726487 -t float -o abs=3e-3&nbsp;
+				-m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><br/>
+<font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -f ABS HACC raw-data-dir f32 1073726487</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset1</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size-template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata1</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Property1</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset2</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size-template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata2</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Property2</font></font></a></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">NYX</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center" style="line-height: 115%"><font color="#222222"><font size="2" style="font-size: 9pt"><span lang="fr-FR"><i><span style="background: #ffffff">Lukic</span></i></span></font></font><font color="#222222"><span style="background: #ffffff">
+				</span></font><font color="#222222"><font size="2" style="font-size: 9pt"><span lang="fr-FR"><i><span style="background: #ffffff">et
+				al. </span></i></span></font></font><font color="#222222"><span style="background: #ffffff">“</span></font><font color="#222222"><font size="2" style="font-size: 9pt"><i><span style="background: #ffffff">methods:
+				numerical, intergalactic medium, quasars: absorption lines,
+				large-scale structure of universe”, journal of Monthly Notices
+				of Royal Astronomical Society</span></i></font></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Cosmology:</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Adaptive
+				mesh hydrodynamics + N-body cosmological simulation </font>
+				</p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">6 fields, 3D, </font>
+				</p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">512
+				x 512 x 512</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Single
+				precision,</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Binary,
+				Little-endian</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<center>
+					<table width="280" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="58" style="border: 1.00pt solid #000000; padding: 0.02in"><p align="center">
+								&nbsp;</p>
+							</td>
+							<td width="102" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.2</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">25.1</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.0</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">24</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.4</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">25.9</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p><br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">2.7 GB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -z -f -i temperature.f32 -M REL -R 1E-2 -3 512 512 512</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -x -f -i temperature.f32 -s temperature.f32.sz -3 512 512 512
+				-a&nbsp;</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -f -i temperature.f32 -z temperature.f32.zfp -o
+				temperature.f32.zfp.out -3 512 512 512 -a 1E-2 -s</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i temperature.f32 -d 512 -d 512 -d 512 -t float
+				-o rel=1e-2&nbsp; -m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><br/>
+<font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -f REL NYX raw-data-dir f32 512 512 512</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+				<p align="center"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512-property.txt"><font color="#1155cc">Property</font></a></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">NWChem</font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center" style="line-height: 115%"><font color="#222222"><font size="2" style="font-size: 9pt"><i><span style="background: #ffffff">Example
+				molecular 2-electron integral values generated by libint, a
+				library developed by the Valeev research group at Virginia Tech.&nbsp;
+				See </span></i></font></font><a href="https://github.com/evaleev/libint"><font color="#1155cc"><font size="2" style="font-size: 9pt"><i><span style="background: #ffffff">https://github.com/evaleev/libint</span></i></font></font></a><font color="#222222"><span style="background: #ffffff">&nbsp;&nbsp;
+				</span></font><font color="#222222"><font size="2" style="font-size: 9pt"><i><span style="background: #ffffff">Libint
+				is an integral evaluation option in NWChemEx.</span></i></font></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				&nbsp;<font color="#222222"><font size="3" style="font-size: 12pt"><span style="background: #ffffff">Two-electron
+				repulsion integrals computed over Gaussian-type orbital basis
+				sets</span></font></font></p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">3 fields, 1D, </font>
+				</p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Double
+				precision,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Binary,
+				Little-endian&nbsp;&nbsp;&nbsp; </font>
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">16GB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -z -d -i 631-tst.bin.d64 -M REL -R 1E-2 -1 102953248</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -x -d -i 631-tst.bin.d64 -s 631-tst.bin.d64.sz -1 102953248 -a</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -d -i 631-tst.bin.d64 -z 631-tst.bin.d64.zfp -o
+				631-tst.bin.d64.zfp.out -a 1E-2 -1 102953248 -s</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i 631-tst.bin.d64 -d 102953248&nbsp; -t double
+				-o rel=1e-2&nbsp; -m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><br/>
+<font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -d REL NWCHEM raw-data-dir d64 102953248</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/SDRBENCH-NWChem-dataset.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+				<p align="center"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/SDRBENCH-NWChem-dataset-property.txt"><font color="#1155cc">Property</font></a></p>
+				<p align="center" style="line-height: 115%; text-decoration: none">
+				<font color="#1155cc">&nbsp;</font></p>
+				<p align="center">&nbsp;</p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">SCALE-LETKF</font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center" style="line-height: 115%"><font color="#222222"><font size="2" style="font-size: 9pt"><i><span style="background: #ffffff">simulation
+				data are generated by The Local Ensemble Transform Kalman Filter
+				(LETKF) data assimilation package for the SCALE-RM weather model
+				(provided by RIKEN)</span></i></font></font></p>
+				<p align="center" style="line-height: 115%"><font color="#222222"><font size="2" style="font-size: 9pt"><span lang="fr-FR"><i><span style="background: #ffffff">Contact:</span></i></span></font></font><font color="#222222"><span style="background: #ffffff">
+				</span></font><font color="#222222"><font size="2" style="font-size: 9pt"><span lang="fr-FR"><i><span style="background: #ffffff">Guo-yuan
+				Lien (guoyuan.lien@gmail.com)</span></i></span></font></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt"><span lang="fr-FR">Climate</span></font>
+				<font size="3" style="font-size: 12pt"><span lang="fr-FR">simulation</span></font></p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">13 fields, 3D, Single
+				precision, binary, little-endian</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<center>
+					<table width="280" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="58" style="border: 1.00pt solid #000000; padding: 0.02in"><p align="center">
+								&nbsp;</p>
+							</td>
+							<td width="102" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">6.7</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">21.7</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">4.6</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">10.2</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.4</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">26.1</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p><br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">4.9GB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -f -z -i T-98x1200x1200.f32 -M REL -R 1E-2 -3 1200 1200 98</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -f -x -i T-98x1200x1200.f32 -s T-98x1200x1200.f32.sz -3 1200
+				1200 98 -a</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -f -i T-98x1200x1200.f32 -z T-98x1200x1200.f32.zfp -o
+				T-98x1200x1200.f32.zfp.out -a 1E-2 -3 1200 1200 98 -s</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i T-98x1200x1200.f32 -d 1200 -d 1200 -d 98&nbsp;
+				-t float -o rel=1e-2&nbsp; -m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><br/>
+<font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -f REL SCALE-LETKF raw-data-dir f32 1200 1200 98</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Property</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200_log.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset2(log-scale)</font></font></a></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">QMCPACK</font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>QMCPACK
+				performance test</i></font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>(contact:
+				Ye Luo: yeluo@anl.gov)</i></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Many-body ab initio
+				Quantum Monte Carlo (electronic structure of atoms, molecules,
+				and solids)</font></p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">1 field, 288 orbitals, 3D,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">69
+				x 69 x 115,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Single
+				precision and</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Binary,
+				Little endian</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<center>
+					<table width="222" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="102" style="border: 1.00pt solid #000000; padding: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.6</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">26.1</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p><br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">1 GB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -z -f -i einspline_288_115_69_69.pre.f32 -M REL -R 1E-2 -3 69
+				69 33120</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -x -f -i einspline_288_115_69_69.pre.f32 -s
+				einspline_288_115_69_69.pre.f32.sz -3 69 69 33120 -a</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -f -i einspline_288_115_69_69.pre.f32 -z
+				einspline_288_115_69_69.pre.f32.zfp -o
+				einspline_288_115_69_69.pre.f32.zfp.out -a 1E-2 -3 69 69 33120</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i einspline_288_115_69_69.pre.f32 -d 69 -d 69
+				-d 33120 -t float -o rel=1e-2&nbsp; -m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -f REL QMCPack raw-data-dir f32 69 69 33120</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/SDRBENCH-QMCPack.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/SDRBENCH-QMCPACK-115x69x69x288-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Property</font></font></a></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Miranda</font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><span lang="fr-FR">Source:</span></font>
+				<font size="2" style="font-size: 10pt"><span lang="fr-FR">hydrodynamics
+				code for large turbulence simulations</span></font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt">(contact:
+				Peter Lindstrom lindstrom2@llnl.gov)</font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt"><span lang="fr-FR">hydrodynamics</span></font>
+				<font size="3" style="font-size: 12pt"><span lang="fr-FR">code
+				for large turbulence simulations</span></font></p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">3D, totally 7 fields,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">each
+				field is</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">256x384x384,
+				</font>
+				</p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Double
+				precision and Binary, Little endian</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<center>
+					<table width="280" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="58" style="border: 1.00pt solid #000000; padding: 0.02in"><p align="center">
+								&nbsp;</p>
+							</td>
+							<td width="102" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.1</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">22.5</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">3.62</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.2</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.7</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">25.1</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p><br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Small</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">1.87GB</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Big</font></p>
+				<p align="center" style="margin-bottom: 0in"><font face="Arial, sans-serif">106GB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -z -d -i density.d64 -M REL -R 1E-2 -3 384 384 256</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -x -d -i density.d64 -s density.d64.sz -3 384 384 256 -a</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -d -3 384 384 256 -i density.d64 -z density.d64.zfp -o
+				density.d64.zfp.out -a 1E-2 -s</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i density.d64 -d 384 -d 384 -d 256 -t double -o
+				rel=1e-2&nbsp; -m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><br/>
+<font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -d REL Miranda raw-data-dir d64 384 384 256</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+				Small (256x384x384)</p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-256x384x384.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/template_data-miranda-256x384x384.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+				<p align="center"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-256x384x384-property.txt"><font color="#1155cc">Property</font></a></p>
+				<p align="center">&nbsp;</p>
+				<p align="center" style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 11pt">Big
+				(3072x3072x3072)</font></font></p>
+				<p align="center" style="margin-bottom: 0in"><br/>
+
+				</p>
+				<p align="center" style="margin-bottom: 0in"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-3072x3072x3072.tar.gz"><font color="#1155cc"><font face="Arial, sans-serif"><font size="2" style="font-size: 11pt">Dataset</font></font></font></a></p>
+				<p align="center" style="margin-bottom: 0in"><br/>
+
+				</p>
+				<p align="center" style="margin-bottom: 0in"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/template_data-miranda-3072x3072x3072.txt"><font color="#1155cc"><font face="Arial, sans-serif"><font size="2" style="font-size: 11pt">Metadata</font></font></font></a></p>
+				<p align="center" style="margin-bottom: 0in"><br/>
+
+				</p>
+				<p align="center" style="margin-bottom: 0in"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-3072x3072x3072-property.txt"><font color="#1155cc"><font face="Arial, sans-serif"><font size="2" style="font-size: 11pt">Property</font></font></font></a></p>
+				<p align="center">&nbsp;</p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">S3D</font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt"><i><span style="background: #ffffff">Kolla,
+				Hemanth </span></i></font><font size="2" style="font-size: 10pt"><i>(</i></font><font size="2" style="font-size: 9pt"><i><span style="background: #ffffff">hnkolla@sandia.gov)</span></i></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Combustion simulation</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">11 fields, 3D,
+				500x500x500,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Double
+				precision</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Binary,
+				Little-endian</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<center>
+					<table width="280" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="58" style="border: 1.00pt solid #000000; padding: 0.02in"><p align="center">
+								&nbsp;</p>
+							</td>
+							<td width="102" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.6</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">21.9</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.6</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">21.8</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.6</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">22</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p><br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				&nbsp;<font size="3" style="font-size: 12pt"><span lang="fr-FR">44
+				GB</span></font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -d -z -i stat_planar.1.1000E-03.field.d64 -M REL -R 1E-2 -3
+				500 500 500</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -d -x -i stat_planar.1.1000E-03.field.d64 -s
+				stat_planar.1.1000E-03.field.d64.sz</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-3
+				500 500 500 -a</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -d -3 500 500 500 -i stat_planar.1.1000E-03.field.d64 -z
+				stat_planar.1.1000E-03.field.d64.zfp -o
+				stat_planar.1.1000E-03.field.d64.zfp.out -a 1E-2 -s</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i stat_planar.1.1000E-03.field.d64 -d 500 -d
+				500 -d 500&nbsp; -t double -o rel=1e-2&nbsp; -m time -m size -M
+				all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><br/>
+<font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -f REL S3D raw-data-dir f32 500 500 500</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/SDRBENCH-S3D.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/template.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/SDRBENCH-S3D-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Property</font></font></a></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font face="Helvetica Neue"><font size="3" style="font-size: 12pt">Basilisk-Turbulence</font></font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i><a href="http://basilisk.fr/">http://basilisk.fr/</a>
+				</i></font>
+				</p>
+				<p align="center" style="line-height: 100%; margin-bottom: 0in"><font face="Helvetica Neue"><font size="3" style="font-size: 12pt"><font size="2" style="font-size: 10pt"><i>M.
+				Xia, Y. Li, P. Jiao, B. Wang, X. Liang and H. Guo, &quot;Time-Varying
+				Vector Field Compression with Preserved Critical Point
+				Trajectories,&quot; 2026 IEEE 42nd International Conference on
+				Data Engineering (ICDE), Montreal, QC, Canada, 2026, pp.
+				2235-2249, doi: 10.1109/ICDE65706.2026.00168</i></font></font></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">2D decaying turbulence
+				simulation</font></p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">4 fields, 3D, </font>
+				</p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">1501x1024x1024
+				&amp; 1001x2048x2048</font></p>
+				<p align="center" style="line-height: 115%; margin-bottom: 0.02in">
+				<font size="3" style="font-size: 12pt">u_1024x1024x1501Re10k.f32</font></p>
+				<p align="center" style="line-height: 115%; margin-bottom: 0.02in">
+				<font size="3" style="font-size: 12pt">v_1024x1024x1501Re10k.f32</font></p>
+				<p align="center" style="line-height: 115%; margin-bottom: 0.02in">
+				<font size="3" style="font-size: 12pt">u_2048x2048x1001Re10k.f32</font></p>
+				<p align="center" style="line-height: 115%; margin-bottom: 0.02in">
+				<font size="3" style="font-size: 12pt">v_2048x2048x1001Re10k.f32</font></p>
+				<p align="center" style="line-height: 115%; margin-bottom: 0.02in">
+				<font size="3" style="font-size: 12pt">Single precision, Binary,
+				Little-endian</font></p>
+				<center>
+					<table width="280" cellpadding="2" cellspacing="0">
+						<col width="54"/>
+						<col width="97"/>
+						<col width="115"/>
+						<tr valign="bottom">
+							<td width="54" style="border: 1.00pt solid #000000; padding: 0.02in"><p align="center">
+								&nbsp;</p>
+							</td>
+							<td width="97" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="115" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="54" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="97" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in" sdval="7.36" sdnum="1033;"><p align="center">
+								<font size="2" style="font-size: 10pt">7.36</font></p>
+							</td>
+							<td width="115" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in" sdval="26.45" sdnum="1033;"><p align="center">
+								<font size="2" style="font-size: 10pt">26.45</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="54" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="97" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in" sdval="7.35" sdnum="1033;"><p align="center">
+								<font size="2" style="font-size: 10pt">7.35</font></p>
+							</td>
+							<td width="115" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in" sdval="26.39" sdnum="1033;"><p align="center">
+								<font size="2" style="font-size: 10pt">26.39</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="54" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="97" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in" sdval="7.38" sdnum="1033;"><p align="center">
+								<font size="2" style="font-size: 10pt">7.38</font></p>
+							</td>
+							<td width="115" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in" sdval="26.53" sdnum="1033;"><p align="center">
+								<font size="2" style="font-size: 10pt">26.53</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p align="center" style="line-height: 115%; margin-bottom: 0.02in">
+				<br/>
+<br/>
+
+				</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">40GB</font></font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress):</b>
+				sz -f -z -i u_1024x1024x1501Re10k.f32 -M REL -R 1E-3 -3 1024 1024
+				1501</font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">SZ(Decompress):
+				sz -f -x -i u_1024x1024x1501Re10k.f32 -s
+				u_1024x1024x1501Re10k.f32.sz -3 1024 1024 1501 -a</font></font></p>
+				<p style="margin-bottom: 0in"><br/>
+
+				</p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b>:
+				zfp -f -3 1024 1024 1501 -i u_1024x1024x1501Re10k.f32 -z
+				u_1024x1024x1501Re10k.f32.zfp -o
+				u_1024x1024x1501Re10k.f32.zfp.out -a 1E-3 -s</font></font></p>
+				<p style="margin-bottom: 0in"><br/>
+
+				</p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">Libpressio:</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/SDRBENCH-Basilisk-Turbulence.tar.gz">Dataset</a></p>
+				<p align="center" style="line-height: 115%; margin-bottom: 0in"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/metadata_1024x1024x1501Re10k.txt">Metadata1</a></p>
+				<p align="center" style="line-height: 115%">(1501x1024x1024)</p>
+				<p align="center" style="line-height: 115%; margin-bottom: 0in"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/metadata_2048x2048x1001Re10k.txt">Metadata2</a></p>
+				<p align="center" style="line-height: 115%">(1001x2048x2048)</p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/README.txt">README</a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/SDRBENCH-Basilisk-Turbulence-property.txt">Property</a></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">XGC</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt">Princeton
+				Plasma Physics Laboratory (PPPL)</font></p>
+				<p align="center" style="line-height: 115%"><a href="https://jychoi-hpc.github.io/adios-python-docs/XGC-mesh-and-field-data.html"><font color="#1155cc"><font size="2" style="font-size: 10pt"><span lang="fr-FR">https://jychoi-hpc.github.io/adios-python-docs/XGC-mesh-and-field-data.html</span></font></font></a></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Fusion Simulation</font></p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				&nbsp;<font size="3" style="font-size: 12pt">9 timesteps, 3D,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">unstructured
+				mesh</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">(the
+				mesh data is in the archive),</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;<font size="3" style="font-size: 12pt">20694x512,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Double
+				precision</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Binary,
+				Little-endian</font></p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">1.2 GB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				NA</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				NA</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				NA</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:</b></font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">N/A</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				NA</font></font></font></p>
+				<p>&nbsp;</p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">(the
+				files are stored in .bp format, you need to install ADIOS to read
+				them)</font></font></p>
+				<p style="margin-bottom: 0in">&nbsp;</p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font color="#1155cc"><font size="3" style="font-size: 12pt"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.3d.tar.gz">Dataset</a>
+				(stored in Adios2)</font></font></p>
+				<p align="center" style="line-height: 115%"><font color="#1155cc"><font size="3" style="font-size: 12pt"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.zip">Dataset</a>
+				(stored in binary format)</font></font></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">NSTX GPI</font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Michael
+				Churchill, Princeton Plasma Physics Laboratory (PPPL)</i></font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>-
+				Copyright: Free to use but need to check with Michael Churchil
+				(rchurchi@pppl.gov) before publishing results.</i></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Fusion Gas Puff Image
+				(GPI) data</font></p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">369,357 steps,</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">2D
+				time-series data (movie), 80x64 image with </font>
+				</p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Double
+				precision</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Binary,
+				Little-endian</font></p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">4.1 GB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				NA</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				NA</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				NA</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:</b></font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">N/A</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				NA</font></font></font></p>
+				<p>&nbsp;</p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">(the
+				files are stored in .bp format, you need to install ADIOS to read
+				them)</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NSTX_GPI/nstx_data_ornl_demo.bp"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NSTX_GPI/template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="185" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: 1.00pt solid #0070c0; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Brown Samples</font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Source:</i></font></p>
+				<p align="center" style="line-height: 115%"><font size="2" style="font-size: 10pt"><i>Brown
+				University</i></font></p>
+			</td>
+			<td width="113" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">Synthetic, generated to
+				specified regularity</font></p>
+			</td>
+			<td width="290" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">1D, </font>
+				</p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Double
+				precision</font></p>
+				<p align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">Binary,
+				Little-endian</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">(3
+				datasets with 3 different regularity)</font></p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<center>
+					<table width="280" cellpadding="0" cellspacing="0">
+						<tr valign="bottom">
+							<td width="58" style="border: 1.00pt solid #000000; padding: 0.02in"><p align="center">
+								&nbsp;</p>
+							</td>
+							<td width="102" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">8 bit Entropy</font></p>
+							</td>
+							<td width="120" style="border-top: 1.00pt solid #000000; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0.02in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center">
+								<font size="2" style="font-size: 10pt">32 bit Entropy</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">avg</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.5</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">23</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">min</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.5</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">23</font></p>
+							</td>
+						</tr>
+						<tr valign="bottom">
+							<td width="58" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: 1.00pt solid #000000; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0.02in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">max</font></p>
+							</td>
+							<td width="102" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">7.6</font></p>
+							</td>
+							<td width="120" style="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: 1.00pt solid #000000; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center">
+								<font size="2" style="font-size: 10pt">23</font></p>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+				<p align="center" style="line-height: 115%">&nbsp;</p>
+			</td>
+			<td width="103" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p lang="fr-FR" align="center" style="line-height: 115%">
+				<font size="3" style="font-size: 12pt">256 MB</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">256
+				MB</font></p>
+				<p lang="fr-FR" align="center" style="line-height: 115%"><font size="3" style="font-size: 12pt">256
+				MB</font></p>
+			</td>
+			<td width="212" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p style="margin-bottom: 0in">
+				<font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Compress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -z -d -i sample_r_B_0.5_26.d64 -M REL -R 1E-2 -1 33554433</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>SZ(Decompress)</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				sz -x -d -i sample_r_B_0.5_26.d64 -s sample_r_B_0.5_26.d64.sz -1
+				33554433 -a&nbsp;</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>ZFP</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">:
+				zfp -d -1 33554433 -i sample_r_B_0.5_26.d64 -z
+				sample_r_B_0.5_26.d64.zfp -o sample_r_B_0.5_26.d64.zfp.out -a
+				1E-2 -s</font></font></font></p>
+				<p style="margin-bottom: 0in"><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt"><b>LibPressio:
+				</b></font></font></font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">pressio</font></font></font><font color="#000000">
+				</font><font color="#000000"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">-b
+				compressor=$COMP -i sample_r_B_0.5_26.d64 -d 33554433 -t double
+				-o rel=1e-2&nbsp; -m time -m size -M all</font></font></font></p>
+				<p style="margin-bottom: 0in"><font face="Arial, sans-serif"><font size="2" style="font-size: 9pt">where
+				$COMP can be sz, zfp, sz3, mgard, etc…</font></font></p>
+				<p style="line-height: 115%"><font color="#000000"><font size="2" style="font-size: 9pt"><b>Z-checker-installer</b></font></font><font color="#000000"><font size="2" style="font-size: 9pt">:
+				./runZCCase.sh -d REL Brown-samples raw-data-dir d64 33554433</font></font></p>
+			</td>
+			<td width="123" style="border-top: none; border-bottom: 1.00pt solid #0070c0; border-left: none; border-right: 1.00pt solid #0070c0; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0.02in"><p align="center" style="line-height: 115%">
+				<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/brown_synth/SDRBENCH-BROWN-33554433.tar.gz"><font color="#1155cc"><font size="3" style="font-size: 12pt">Dataset</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/brown_synth/template_data.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Metadata</font></font></a></p>
+				<p align="center" style="line-height: 115%"><a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/brown_synth/SDRBENCH-BROWN-33554433-property.txt"><font color="#1155cc"><font size="3" style="font-size: 12pt">Property</font></font></a></p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p align="justify" style="line-height: 115%"><font size="3" style="font-size: 12pt"><i>Note:
+This table will be augmented with metrics that matter for users of
+these datasets as well as recommended settings for error control
+(lossy compression).</i></font></p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p align="justify" style="line-height: 115%; orphans: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</p>
+<p align="justify" style="line-height: 115%"><font size="3" style="font-size: 12pt">In
+general, the extension of the data file is named in the following
+convention:</font></p>
+<p style="line-height: 115%; orphans: 1">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">.f32 means
+single-precision floating point data in little-endian type&nbsp;&nbsp;&nbsp;
+</font>
+</p>
+<p style="line-height: 115%; orphans: 1">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">.F32 means
+single-precision floating point data in big-endian type&nbsp;&nbsp;&nbsp;
+</font>
+</p>
+<p style="line-height: 115%; orphans: 1">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">.f64 means
+double-precision floating point data in little-endian type&nbsp; </font>
+</p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">.F64 means
+double-precision floating point data in big-endian type</font></p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p align="justify" style="line-height: 115%"><font size="3" style="font-size: 12pt">Others:
+please submit your proposal of datasets to codar-reduction (at)
+cels.anl.gov. Requirements: datasets will be open to public access.
+Dataset should be linked to a simulation application or a scientific
+instrument. Metadata should explain the source origin of the dataset
+and how it has been produced (what simulation, what instrument, what
+settings). Upon review by the SDRBenchmarks committee, the dataset
+will (or will not) be added to the SDRBenchmarks repository.</font></p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p align="justify" style="line-height: 115%"><font face="Liberation Serif, serif"><font color="#0070c0"><font size="3" style="font-size: 12pt"><span lang="fr-FR">Lossy</span></font></font><font color="#0070c0">
+</font><font color="#0070c0"><font size="3" style="font-size: 12pt"><span lang="fr-FR">compressors:</span></font></font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">SZ:</span></font></font>
+<a href="https://github.com/disheng222/SZ"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">https://github.com/szcompressor/SZ</span></font></font></font></a></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">ZFP:</span></font></font>
+<a href="https://github.com/LLNL/zfp"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">https://github.com/LLNL/zfp</span></font></font></font></a></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">TTHRESH:
+</font></font><a href="https://github.com/rballester/tthresh"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">https://github.com/rballester/tthresh</font></font></font></a></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">MGARD:</span></font></font>
+<a href="https://github.com/CODARcode/MGARD"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><span lang="fr-FR">https://github.com/CODARcode/MGARD</span></font></font></font></a></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">SPERR:</span></font></font>
+<a href="https://github.com/NCAR/SPERR"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><span lang="fr-FR">https://github.com/NCAR/SPERR</span></font></font></font></a></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">ISABELA:</span></font></font>
+<a href="http://freescience.org/cs/ISABELA/ISABELA.html"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><span lang="fr-FR">http://freescience.org/cs/ISABELA/ISABELA.html</span></font></font></font></a></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="font-variant: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">PFPL</font></font></font></span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">:
+</font></font><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><u>https://github.com/burtscher/PFPL</u></font></font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">DCTZ:</span></font></font>
+<a href="https://github.com/swson/DCTZ"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">https://github.com/swson/DCTZ</span></font></font></font></a>
+</p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Digit
+rounding: </font></font><a href="https://github.com/CNES/Digit_Rounding"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">https://github.com/CNES/Digit_Rounding</font></font></font></a>
+</p>
+<p style="line-height: 115%"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">(standalone
+version: </span></font></font><a href="https://github.com/disheng222/digitroundingZ"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">https://github.com/disheng222/digitroundingZ</span></font></font></font></a>
+<font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">)</span></font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Bit
+grooming: </font></font><a href="https://github.com/nco/nco"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">https://github.com/nco/nco</font></font></font></a>
+</p>
+<p style="line-height: 115%"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">(standalone
+version: </span></font></font><a href="https://github.com/disheng222/BitGroomingZ.git"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">https://github.com/disheng222/BitGroomingZ.git</span></font></font></font></a>
+<font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">)</span></font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Others:
+please submit your suggestion of lossy compressor, with github link
+to codar-reduction (at) cels.anl.gov</font></font></p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p align="justify" style="line-height: 115%"><font color="#0070c0"><font size="3" style="font-size: 12pt">Unifying
+generic Interface for Compression:</font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">LibPressio:
+</font><a href="https://robertu94.github.io/libpressio/"><font color="#1155cc"><font size="3" style="font-size: 12pt">https://robertu94.github.io/libpressio/</font></font></a></p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p align="justify" style="line-height: 115%"><font face="Liberation Serif, serif"><font color="#0070c0"><font size="3" style="font-size: 12pt"><span lang="fr-FR">Lossless</span></font></font><font color="#0070c0">
+</font><font color="#0070c0"><font size="3" style="font-size: 12pt"><span lang="fr-FR">compressors:</span></font></font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">FPZIP:
+</font></font><a href="https://computation.llnl.gov/projects/floating-point-compression"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">https://computation.llnl.gov/projects/floating-point-compression</font></font></font></a>
+</p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">ZFP:</span></font></font>
+<a href="https://github.com/LLNL/zfp"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">https://github.com/LLNL/zfp</span></font></font></font></a></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">FPC:</span></font></font>
+<a href="http://cs.txstate.edu/~burtscher/research/FPC/"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">http://cs.txstate.edu/~burtscher/research/FPC/</span></font></font></font></a><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">.</span></font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">pFPC</span></font></font>
+<font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">(parallel)
+</span></font></font><a href="http://cs.txstate.edu/~burtscher/research/pFPC/"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">http://cs.txstate.edu/~burtscher/research/pFPC/</span></font></font></font></a><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">.</span></font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">SPDP
+</font></font><a href="http://cs.txstate.edu/~burtscher/research/SPDP/"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">http://cs.txstate.edu/~burtscher/research/SPDP/</font></font></font></a><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">.</font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">GFC
+(GPUs): </font></font><a href="http://cs.txstate.edu/~burtscher/research/GFC/"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">http://cs.txstate.edu/~burtscher/research/GFC/</font></font></font></a>&nbsp;
+</p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">MPC
+(GPUs): </font></font><a href="http://cs.txstate.edu/~burtscher/research/MPC/"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">http://cs.txstate.edu/~burtscher/research/MPC</font></font></font></a></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">BLOSC:</span></font></font>
+<a href="https://github.com/Blosc/c-blosc"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">https://github.com/Blosc/c-blosc</span></font></font></font></a></p>
+<p style="line-height: 115%"><font color="#000000">●</font><span style="font-variant: normal"><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></span><span style="font-variant: normal"><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">Fpcompress</span></font></font></font></span><font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="fr-FR">:
+</span></font></font></font><span style="display: inline-block; border: none; padding: 0in"><a href="https://urldefense.us/v3/__https://github.com/burtscher/FPcompress/__;!!G_uCfscf7eWS!f6fflhjOmneG7VnWdqnxmbYcgudumPqSlSHetovoyFSm2N6Dlz0VqFZfRgshcLYgRXq0cL0J3chS5p4X_Gj7$" target="_blank"><span style="font-variant: normal"><font color="#1155cc"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span style="letter-spacing: normal"><span lang="fr-FR"><span style="font-style: normal"><span style="font-weight: normal">https://github.com/burtscher/FPcompress/</span></span></span></span></font></font></font></span></a></span></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Others:
+please submit your suggestion of lossless compressor, with github
+link to codar-reduction (at) cels.anl.gov</font></font></p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p align="justify"><font color="#0070c0"><font size="3" style="font-size: 12pt">Unifying
+generic Interface for Compression (lossy and lossless):</font></font></p>
+<ul type="disc">
+	<li><p align="justify"><font color="#000000"><font size="3" style="font-size: 12pt">LibPressio:
+	</font></font><a href="https://robertu94.github.io/libpressio/"><font color="#1155cc"><font size="3" style="font-size: 12pt">https://robertu94.github.io/libpressio/</font></font></a>
+		</p></li>
+</ul>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p align="justify" style="line-height: 115%"><font color="#0070c0"><font size="3" style="font-size: 12pt">Commonly
+used metrics for reduction technique assessment:</font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">Reduction/reconstruction
+rate in [G|M|K]B/s </font>
+</p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">Reduction ratio
+(Initial size/compressed size)</font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">[Lossy] Rate distortion
+(PSNR at different bit rates) </font>
+</p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">[Lossy] PSNR in dB,
+MSE, RMSE and NRMSE </font>
+</p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">[Lossy] SSIM
+(structural similarity index)</font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">[Lossy] Pearson
+correlation of the initial and reconstructed dataset</font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">[Lossy] Autocorrelation
+of the compression error (1D, … nD) </font>
+</p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">[Lossy] Spectral
+alteration (difference of power spectrum)</font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">[Lossy] Preservation of
+the n order derivatives</font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">Others: please submit
+your suggestion of assessment metric, to codar-reduction (at)
+cels.anl.gov</font></p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p align="justify" style="line-height: 115%"><font color="#0070c0"><font size="3" style="font-size: 12pt"><span lang="fr-FR">Error</span></font></font><font color="#0070c0">
+</font><font color="#0070c0"><font size="3" style="font-size: 12pt"><span lang="fr-FR">controls:</span></font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">[Common] Point wise
+absolute error bound</font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">[Common] Point wise
+relative error bound</font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">[Variation] Value range
+point wise relative error bound</font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt"><span lang="fr-FR">[Other]
+Fixed PSNR</span></font></p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p align="justify" style="line-height: 115%"><font color="#0070c0"><font size="3" style="font-size: 12pt">Assessment
+tools, metrics and error control:</font></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">Z-checker:
+</font><a href="https://github.com/CODARcode/Z-checker"><font color="#1155cc"><font size="3" style="font-size: 12pt">https://github.com/CODARcode/Z-checker</font></font></a></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">Foresight:
+<a href="https://github.com/lanl/VizAly-Foresight">https://github.com/lanl/VizAly-Foresight</a></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">ldcpy:
+<a href="https://github.com/NCAR/ldcpy">https://github.com/NCAR/ldcpy</a></font></p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">SFS
+<a href="https://github.com/JulianKunkel/statistical-file-scanner">https://github.com/JulianKunkel/statistical-file-scanner</a></font></p>
+<p style="line-height: 115%">●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><font size="3" style="font-size: 12pt">Others: please submit
+your suggestion of assessment tools, with github link to
+codar-reduction (at) cels.anl.gov</font></p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p lang="fr-FR"><font color="#0070c0">Contributors/maintainers: </font>
+</p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="fr-FR">F. Cappello (ANL, lead), </span>
+</p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="fr-FR">M. Ainsworth (Brown University),</span></p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="fr-FR">J. Bessac (ANL), </span>
+</p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Martin Burtscher (Texas State University),</p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="fr-FR">Jong Youl Choi (ORNL)</span></p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="fr-FR">E. Constantinescu (ANL),</span></p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="fr-FR">S. Di (ANL), </span>
+</p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="fr-FR">H. Guo (ANL),</span></p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="fr-FR">Peter Lindstrom (LLNL),</span></p>
+<p>●<span style="font-variant: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="fr-FR">Ozan</span> <span lang="fr-FR">Tugluk
+(Brown University).</span></p>
+<p>&nbsp;</p>
+<p><i><b>We sincerely acknowledge that the following contributors
+agreed on the release of their scientific datasets: </b></i>
+</p>
+<p>Salman Habib (ANL), Katrin Heitmann (ANL), Zarija Lubik (LBNL),
+Rob Jacob (ANL), Danny Perez (LANL), Chun Hong Yoon (SLAC),
+Kristopher W. Keipert (ANL), Guo-Yuan Lien (Central Weather Bureau
+Taiwan), Ye Luo (ANL), Peter Lindstrom (LLNL),<span style="background: #ffffff">
+Hemanth Kolla (SNL), Jong Choi (ORNL), Michael Churchill (PPPL), Ozan
+Tugluk (Brown University)</span></p>
+<p>&nbsp;</p>
+<p align="justify" style="line-height: 115%">&nbsp;</p>
+<p lang="fr-FR" align="justify" style="line-height: 115%"><font color="#0070c0"><font size="3" style="font-size: 12pt">Sponsors:</font></font></p>
+<p align="justify" style="line-height: 115%; orphans: 2"><font color="#0070c0"><img src="images/image2.png" name="Image1" align="bottom" width="171" height="77" border="0"/>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="images/image1.png" name="Image2" align="bottom" width="96" height="84" border="0"/>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/image3.png" name="Image3" align="bottom" width="172" height="86" border="0"/>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font>
+</p>
+</body>
+</html>

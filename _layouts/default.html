@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Home - SDRBench</title>
-  <meta name="description" content="Scientific Data Reduction Benchmarks">
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ site.description }}">
   <style>
     :root {
       --primary: #0070c0;
@@ -30,6 +30,7 @@
       background: var(--bg);
     }
 
+    /* Navigation */
     nav {
       background: var(--primary-dark);
       padding: 0 2rem;
@@ -73,6 +74,7 @@
       color: #fff;
     }
 
+    /* Hero */
     .hero {
       background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--accent) 100%);
       color: #fff;
@@ -84,7 +86,6 @@
       font-weight: 700;
       margin-bottom: 0.75rem;
       letter-spacing: -0.5px;
-      color: #fff;
     }
     .hero p {
       font-size: 1.15rem;
@@ -93,6 +94,7 @@
       margin: 0 auto;
     }
 
+    /* Content */
     .content {
       max-width: 1200px;
       margin: 0 auto;
@@ -115,9 +117,12 @@
     a { color: var(--primary); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    ul, ol { margin: 0.5rem 0 1rem 1.75rem; }
+    ul, ol {
+      margin: 0.5rem 0 1rem 1.75rem;
+    }
     li { margin-bottom: 0.35rem; }
 
+    /* Cards */
     .card {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -125,7 +130,6 @@
       box-shadow: var(--shadow);
       margin-bottom: 2rem;
       overflow: hidden;
-      scroll-margin-top: 4.5rem;
     }
     .card-header {
       background: var(--primary);
@@ -153,6 +157,7 @@
       padding: 1.5rem;
     }
 
+    /* Dataset grid */
     .dataset-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -163,7 +168,9 @@
       .dataset-grid { grid-template-columns: 1fr; }
     }
 
-    .detail-group { margin-bottom: 1rem; }
+    .detail-group {
+      margin-bottom: 1rem;
+    }
     .detail-group h4 {
       font-size: 0.8rem;
       text-transform: uppercase;
@@ -173,6 +180,7 @@
       font-weight: 600;
     }
 
+    /* Tables */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -193,9 +201,17 @@
     td { background: var(--bg); }
     tr:nth-child(even) td { background: var(--bg-alt); }
 
-    .entropy-table { width: auto; min-width: 200px; }
-    .entropy-table th, .entropy-table td { text-align: center; padding: 0.35rem 0.6rem; }
+    .entropy-table {
+      width: auto;
+      min-width: 200px;
+    }
+    .entropy-table th,
+    .entropy-table td {
+      text-align: center;
+      padding: 0.35rem 0.6rem;
+    }
 
+    /* Code */
     code {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
       background: var(--code-bg);
@@ -213,8 +229,13 @@
       font-size: 0.82rem;
       line-height: 1.6;
     }
-    pre code { background: none; padding: 0; font-size: inherit; }
+    pre code {
+      background: none;
+      padding: 0;
+      font-size: inherit;
+    }
 
+    /* Links section */
     .download-links {
       display: flex;
       flex-wrap: wrap;
@@ -237,6 +258,7 @@
       text-decoration: none;
     }
 
+    /* Source info */
     .source-info {
       font-size: 0.88rem;
       color: var(--text-light);
@@ -244,6 +266,7 @@
       margin-top: 0.25rem;
     }
 
+    /* Alert box */
     .alert {
       background: #fff3cd;
       border: 1px solid #ffc107;
@@ -252,9 +275,14 @@
       padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
-    .alert h3 { color: #856404; margin: 0 0 0.75rem; font-size: 1.05rem; }
+    .alert h3 {
+      color: #856404;
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
     .alert ul { margin-bottom: 0; }
 
+    /* Info box */
     .info-box {
       background: var(--primary-light);
       border: 1px solid #b3d7f2;
@@ -264,6 +292,22 @@
       margin: 1.5rem 0;
     }
 
+    /* Tool list */
+    .tool-list {
+      list-style: none;
+      margin-left: 0;
+    }
+    .tool-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tool-list li:last-child { border-bottom: none; }
+    .tool-list .tool-name {
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    /* Sponsors */
     .sponsors {
       display: flex;
       align-items: center;
@@ -280,6 +324,7 @@
     }
     .sponsors img:hover { opacity: 1; }
 
+    /* Footer */
     footer {
       background: var(--bg-alt);
       border-top: 1px solid var(--border);
@@ -289,7 +334,10 @@
       font-size: 0.9rem;
     }
 
-    details { margin: 0.5rem 0; }
+    /* Collapsible commands */
+    details {
+      margin: 0.5rem 0;
+    }
     details summary {
       cursor: pointer;
       font-weight: 600;
@@ -299,6 +347,7 @@
     }
     details summary:hover { color: var(--primary-dark); }
 
+    /* Contributors grid */
     .contributors {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -311,63 +360,25 @@
       border-left: 3px solid var(--primary-light);
     }
 
+    /* Page header */
     .page-header {
       background: var(--bg-alt);
       border-bottom: 1px solid var(--border);
       padding: 2rem;
     }
-    .page-header .content { padding: 0; }
-    .page-header h1 { margin-bottom: 0.5rem; }
-    .page-header p { color: var(--text-light); margin-bottom: 0; font-size: 1.05rem; }
+    .page-header .content {
+      padding: 0;
+    }
+    .page-header h1 {
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      color: var(--text-light);
+      margin-bottom: 0;
+      font-size: 1.05rem;
+    }
 
-    .jump-to {
-      position: relative;
-      display: inline-block;
-      margin-top: 1rem;
-    }
-    .jump-to-btn {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 0.55rem 1.25rem;
-      border-radius: var(--radius);
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .jump-to-btn:hover { background: var(--primary-dark); }
-    .jump-to-btn::after { content: " \25BC"; font-size: 0.75em; }
-    .jump-to-list {
-      display: none;
-      position: absolute;
-      left: 0;
-      top: 100%;
-      margin-top: 4px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-      min-width: 260px;
-      z-index: 50;
-      max-height: 70vh;
-      overflow-y: auto;
-    }
-    .jump-to.open .jump-to-list { display: block; }
-    .jump-to-list a {
-      display: block;
-      padding: 0.5rem 1rem;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.9rem;
-      border-bottom: 1px solid var(--bg-alt);
-    }
-    .jump-to-list a:hover {
-      background: var(--primary-light);
-      color: var(--primary-dark);
-    }
-    .jump-to-list a:last-child { border-bottom: none; }
-
+    /* Hamburger (mobile) */
     .hamburger {
       display: none;
       background: none;
@@ -398,73 +409,18 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="site-title">SDRBench</a>
+    <a href="{{ '/' | relative_url }}" class="site-title">SDRBench</a>
     <button class="hamburger" onclick="document.getElementById('nav-menu').classList.toggle('open')">&#9776;</button>
     <ul id="nav-menu">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="datasets.html">Datasets</a></li>
-      <li><a href="tools.html">Tools</a></li>
-      <li><a href="publications.html">Publications</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a></li>
+      <li><a href="{{ '/datasets' | relative_url }}" {% if page.url == '/datasets.html' or page.url == '/datasets/' %}class="active"{% endif %}>Datasets</a></li>
+      <li><a href="{{ '/tools' | relative_url }}" {% if page.url == '/tools.html' or page.url == '/tools/' %}class="active"{% endif %}>Tools</a></li>
+      <li><a href="{{ '/about' | relative_url }}" {% if page.url == '/about.html' or page.url == '/about/' %}class="active"{% endif %}>About</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="hero">
-  <h1>Scientific Data Reduction Benchmarks</h1>
-  <p>Reference scientific datasets, data reduction techniques, error metrics, error controls, and error assessment tools for users and developers of scientific data reduction techniques.</p>
-</div>
-
-<div class="content">
-<p>This site has been established as part of the <a href="https://www.exascaleproject.org/">ECP</a> <a href="https://www.exascaleproject.org/project/codar-co-design-center-online-data-analysis-reduction-exascale/">CODAR</a> project. It provides reference scientific datasets, data reduction techniques, error metrics, error controls, and error assessment tools for users and developers of scientific data reduction techniques.</p>
-<div class="alert">
-<h3>Important: When publishing results from one or more datasets presented in this website, please:</h3>
-<ul>
-<li><strong>Cite</strong>: SDRBench -- <em>https://sdrbench.github.io</em></li>
-<li><strong>Please also cite</strong>: K. Zhao, S. Di, X. Liang, S. Li, D. Tao, J. Bessac, Z. Chen, and F. Cappello, "SDRBench: Scientific Data Reduction Benchmark for Lossy Compressors", International Workshop on Big Data Reduction (IWBDR2020), in conjunction with IEEE Bigdata20.</li>
-<li><strong>Acknowledge</strong>: the source of the dataset you used, the DOE NNSA ECP project, and the ECP CODAR project.</li>
-<li><strong>Check</strong>: the condition of publications (some dataset sources request prior check).</li>
-<li><strong>Contact</strong>: the compressor authors to get the correct compressor configuration according to each dataset and each comparison metrics.</li>
-</ul>
-</div>
-<div class="info-box">
-<p><strong>Dimension ordering note:</strong> The order of the dimensions shown in the "Format" column of the dataset table is in row-major order (C order), consistent with well-known I/O libraries such as HDF5. For example, for the CESM-ATM dataset (1800 x 3600), 1800 is the higher dimension (changing slower) and 3600 is the lower dimension (changing faster). For most compressors (such as SZ, ZFP, and FPZIP), the dimensions should be given in the reverse order (such as <code>-2 3600 1800</code>) for their executables. If you are not sure about the order of dimensions, one simple method is trying different dimension orders and selecting the results with highest compression ratios.</p>
-</div>
-<h2>File Extension Conventions</h2>
-<table>
-<thead>
-<tr>
-<th>Extension</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>.f32</code></td>
-<td>Single-precision floating point data, little-endian</td>
-</tr>
-<tr>
-<td><code>.F32</code></td>
-<td>Single-precision floating point data, big-endian</td>
-</tr>
-<tr>
-<td><code>.f64</code></td>
-<td>Double-precision floating point data, little-endian</td>
-</tr>
-<tr>
-<td><code>.F64</code></td>
-<td>Double-precision floating point data, big-endian</td>
-</tr>
-</tbody>
-</table>
-<h2>Submit a Dataset</h2>
-<p>Please submit your proposal of datasets to <strong>codar-reduction (at) cels.anl.gov</strong>.</p>
-<p><strong>Requirements:</strong>
-- Datasets must be open to public access
-- Dataset should be linked to a simulation application or a scientific instrument
-- Metadata should explain the source origin of the dataset and how it has been produced (what simulation, what instrument, what settings)
-- Upon review by the SDRBenchmarks committee, the dataset will (or will not) be added to the SDRBenchmarks repository</p>
-</div>
+{{ content }}
 
 <footer>
   <p>SDRBench &mdash; Scientific Data Reduction Benchmarks</p>

@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Datasets - SDRBench</title>
+  <meta name="description" content="Scientific Data Reduction Benchmarks">
+  <style>
+    :root {
+      --primary: #0070c0;
+      --primary-dark: #005a9e;
+      --primary-light: #e8f4fd;
+      --accent: #00a4ef;
+      --bg: #ffffff;
+      --bg-alt: #f5f7fa;
+      --text: #2c3e50;
+      --text-light: #5a6d7e;
+      --border: #dce1e8;
+      --code-bg: #f0f3f7;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+      --radius: 6px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      background: var(--bg);
+    }
+
+    nav {
+      background: var(--primary-dark);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    nav .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .site-title {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 0.9rem 0;
+      letter-spacing: 0.5px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 0;
+    }
+    nav ul li a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      padding: 1rem 1.25rem;
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--accent) 100%);
+      color: #fff;
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      opacity: 0.92;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+
+    h1 { font-size: 2rem; color: var(--primary-dark); margin-bottom: 1rem; }
+    h2 {
+      font-size: 1.5rem;
+      color: var(--primary-dark);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    h3 { font-size: 1.15rem; color: var(--primary); margin: 1.5rem 0 0.75rem; }
+    h4 { font-size: 1rem; color: var(--text); margin: 1rem 0 0.5rem; }
+
+    p { margin-bottom: 1rem; }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    ul, ol { margin: 0.5rem 0 1rem 1.75rem; }
+    li { margin-bottom: 0.35rem; }
+
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      scroll-margin-top: 4.5rem;
+    }
+    .card-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .card-header h3 {
+      color: #fff;
+      margin: 0;
+      font-size: 1.2rem;
+    }
+    .card-header .badge {
+      background: rgba(255,255,255,0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .dataset-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 768px) {
+      .dataset-grid { grid-template-columns: 1fr; }
+    }
+
+    .detail-group { margin-bottom: 1rem; }
+    .detail-group h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      margin: 0 0 0.4rem;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    td { background: var(--bg); }
+    tr:nth-child(even) td { background: var(--bg-alt); }
+
+    .entropy-table { width: auto; min-width: 200px; }
+    .entropy-table th, .entropy-table td { text-align: center; padding: 0.35rem 0.6rem; }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      background: var(--code-bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 0.5rem 0 1rem;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    pre code { background: none; padding: 0; font-size: inherit; }
+
+    .download-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .download-links a {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.35rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .download-links a:hover {
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .source-info {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      font-style: italic;
+      margin-top: 0.25rem;
+    }
+
+    .alert {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-left: 4px solid #ffc107;
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .alert h3 { color: #856404; margin: 0 0 0.75rem; font-size: 1.05rem; }
+    .alert ul { margin-bottom: 0; }
+
+    .info-box {
+      background: var(--primary-light);
+      border: 1px solid #b3d7f2;
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .sponsors {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding: 2rem 0;
+    }
+    .sponsors img {
+      max-height: 80px;
+      width: auto;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .sponsors img:hover { opacity: 1; }
+
+    footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    details { margin: 0.5rem 0; }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary);
+      padding: 0.25rem 0;
+    }
+    details summary:hover { color: var(--primary-dark); }
+
+    .contributors {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.5rem;
+      list-style: none;
+      margin-left: 0;
+    }
+    .contributors li {
+      padding: 0.5rem 0.75rem;
+      border-left: 3px solid var(--primary-light);
+    }
+
+    .page-header {
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem;
+    }
+    .page-header .content { padding: 0; }
+    .page-header h1 { margin-bottom: 0.5rem; }
+    .page-header p { color: var(--text-light); margin-bottom: 0; font-size: 1.05rem; }
+
+    .jump-to {
+      position: relative;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+    .jump-to-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.55rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .jump-to-btn:hover { background: var(--primary-dark); }
+    .jump-to-btn::after { content: " \25BC"; font-size: 0.75em; }
+    .jump-to-list {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      margin-top: 4px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      min-width: 260px;
+      z-index: 50;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    .jump-to.open .jump-to-list { display: block; }
+    .jump-to-list a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--bg-alt);
+    }
+    .jump-to-list a:hover {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+    .jump-to-list a:last-child { border-bottom: none; }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    @media (max-width: 600px) {
+      .hamburger { display: block; }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--primary-dark);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      }
+      nav ul.open { display: flex; }
+      nav ul li a { padding: 0.75rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="site-title">SDRBench</a>
+    <button class="hamburger" onclick="document.getElementById('nav-menu').classList.toggle('open')">&#9776;</button>
+    <ul id="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="datasets.html" class="active">Datasets</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="page-header">
+  <div class="content">
+    <h1>Datasets</h1>
+    <p>Reference scientific datasets for benchmarking data reduction techniques. Click on command examples to expand.</p>
+    <div class="jump-to" id="jump-to">
+  <button class="jump-to-btn" onclick="document.getElementById('jump-to').classList.toggle('open')">Jump to Dataset</button>
+  <div class="jump-to-list" onclick="document.getElementById('jump-to').classList.remove('open')">
+    <a href="#cesm-atm">CESM-ATM</a>
+    <a href="#exaalt">EXAALT</a>
+    <a href="#hurricane-isabel">Hurricane ISABEL</a>
+    <a href="#exafel">EXAFEL</a>
+    <a href="#hacc">HACC</a>
+    <a href="#nyx">NYX</a>
+    <a href="#nwchem">NWChem</a>
+    <a href="#scale-letkf">SCALE-LETKF</a>
+    <a href="#qmcpack">QMCPACK</a>
+    <a href="#miranda">Miranda</a>
+    <a href="#s3d">S3D</a>
+    <a href="#basilisk-turbulence">Basilisk-Turbulence</a>
+    <a href="#xgc">XGC</a>
+    <a href="#nstx-gpi">NSTX GPI</a>
+    <a href="#brown-samples">Brown Samples</a>
+  </div>
+</div>
+<script>document.addEventListener('click',function(e){if(!document.getElementById('jump-to').contains(e.target))document.getElementById('jump-to').classList.remove('open')})</script>
+  </div>
+</div>
+
+<div class="content">
+
+<p><em>Note: This table will be augmented with metrics that matter for users of these datasets as well as recommended settings for error control (lossy compression).</em></p>
+
+
+<div class="card" id="cesm-atm">
+  <div class="card-header">
+    <h3>CESM-ATM</h3>
+    <span class="badge">Climate simulation</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> Mark Taylor (SNL)</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>Dataset1: 79 fields, 2D, 1800x3600<br>
+Dataset2: 1 field, 3D, 26x1800x3600<br>
+Both single precision, binary</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>Dataset1 (raw): 1.47GB<br>
+Dataset1 (cleared): 1.47GB<br>
+Dataset2: 17GB<br>
+(cleared data zeroed all background data)</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>6.5</td><td>19.8</td></tr>
+<tr><td><strong>min</strong></td><td>1.5</td><td>2.3</td></tr>
+<tr><td><strong>max</strong></td><td>7.8</td><td>22.6</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-1800x3600.tar.gz">Dataset1 (raw)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-cleared-1800x3600.tar.gz">Dataset1 (cleared)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-26x1800x3600.tar.gz">Dataset2 (raw)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/template_data.txt">Metadata</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-cleared-1800x3600-property.txt">Dataset1 Property</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-26x1800x3600-property.txt">Dataset2 Property</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -z -f -i CLDHGH_1_1800_3600.f32 -M REL -R 1E-2 -2 3600 1800
+<b>SZ (Decompress):</b> sz -x -f -i CLDHGH_1_1800_3600.f32 -2 3600 1800 -s CLDHGH_1_1800_3600.f32.sz -a
+<b>ZFP:</b>              zfp -f -i CLDHGH_1_1800_3600.f32 -z CLDHGH_1_1800_3600.f32.zfp -o CLDHGH_1_1800_3600.f32.zfp.out -2 3600 1800 -a 1E-2 -s
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i CLDHGH_1_1800_3600.f32 -d 3600 -d 1800 -t float -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -f REL CESM-ATM raw-data-dir f32 3600 1800</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="exaalt">
+  <div class="card-header">
+    <h3>EXAALT</h3>
+    <span class="badge">Molecular dynamics simulation</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> EXAALT team</p>
+    <p class="source-info">This dataset has been approved for unlimited release by Los Alamos National Laboratory and has been assigned LA-UR-18-25670.</p>
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>6 fields: x, y, z, vx, vy, vz<br>
+Each field stored separately<br>
+Single precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>Dataset1: 60 MB<br>
+Dataset2: 973 MB<br>
+Dataset3: 2.4 GB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <p><strong>Data1</strong></p>
+<table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>7.3</td><td>19.9</td></tr>
+<tr><td><strong>min</strong></td><td>7</td><td>18.4</td></tr>
+<tr><td><strong>max</strong></td><td>7.4</td><td>20.4</td></tr>
+</table>
+<p><strong>Data2</strong></p>
+<table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>6.7</td><td>15.4</td></tr>
+<tr><td><strong>min</strong></td><td>6</td><td>9.40</td></tr>
+<tr><td><strong>max</strong></td><td>7.1</td><td>20.1</td></tr>
+</table>
+<p><strong>Data3</strong></p>
+<table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>6.9</td><td>16.3</td></tr>
+<tr><td><strong>min</strong></td><td>6.8</td><td>15.6</td></tr>
+<tr><td><strong>max</strong></td><td>7.2</td><td>17.6</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440.tar.gz">Dataset1</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440-template_data.txt">Metadata1</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440-property.txt">Property1</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-copper.tar.gz">Dataset2</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-copper-template_data.txt">Metadata2</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-copper-property.txt">Property2</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-helium.tar.gz">Dataset3</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-helium-template_data.txt">Metadata3</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-helium-property.txt">Property3</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -z -f -i xx.f32 -M REL -R 1E-2 -1 2869440
+<b>SZ (Decompress):</b> sz -x -f -i xx.f32 -1 2869440 -s xx.f32.sz -a
+<b>ZFP:</b>              zfp -f -i xx.f32 -z xx.f32.zfp -o xx.f32.zfp.out -1 2869440 -a 1E-2 -s
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i xx.f32 -d 2869440 -t float -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -f REL EXAALT raw-data-dir f32 2869440</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="hurricane-isabel">
+  <div class="card-header">
+    <h3>Hurricane ISABEL</h3>
+    <span class="badge">Weather simulation</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> IEEE Visualization 2004 Contest (<a href="http://vis.computer.org/vis2004contest/data.html">http://vis.computer.org/vis2004contest/data.html</a>)</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>13 fields, 3D, 100x500x500<br>
+Single precision, binary<br>
+(cleared dataset by replacing background by 0)</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>1.25GB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>5.9</td><td>18.9</td></tr>
+<tr><td><strong>min</strong></td><td>0.7</td><td>1.3</td></tr>
+<tr><td><strong>max</strong></td><td>7.5</td><td>24.2</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500.tar.gz">Dataset</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-template_data.txt">Metadata</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-property.txt">Property</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -z -f -i Pf48.bin.f32 -M REL -R 1E-2 -3 500 500 100
+<b>SZ (Decompress):</b> sz -x -f -i Pf48.bin.f32 -3 500 500 100 -s Pf48.bin.f32.sz -a
+<b>ZFP:</b>              zfp -f -i Pf48.bin.f32 -3 500 500 100 -z Pf48.bin.f32.zfp -o Pf48.bin.f32.zfp.out -a 1E-2 -s
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i Pf48.bin.f32 -d 500 -d 500 -d 100 -t float -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -f REL Hurricane raw-data-dir f32 500 500 100</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="exafel">
+  <div class="card-header">
+    <h3>EXAFEL</h3>
+    <span class="badge">Images from the LCLS instrument</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> LCLS</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>1 field, 2D<br>
+Single precision<br>
+HDF5 and binary</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>Dataset1: 51 MB<br>
+Dataset2: 8.5 GB<br>
+Dataset3: 1 GB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>value</strong></td><td>7.4</td><td>25.7</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-10x32x185x388.tar.gz">Dataset1</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-986x32x185x388.tar.gz">Dataset2</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/template_data.txt">Metadata</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-986x32x185x388-property.txt">Property</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-130x1480x1552.tar.gz">Dataset3</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/template_data-exafel-130x1480x1552.txt">Metadata (Dataset3)</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -z -f -i EXAFEL-LCLS-986x32x185x388.f32 -M REL -R 1E-2 -2 388 5837120
+<b>SZ (Decompress):</b> sz -x -f -i EXAFEL-LCLS-986x32x185x388.f32 -s EXAFEL-LCLS-986x32x185x388.f32.sz -2 388 5837120 -a
+<b>ZFP:</b>              zfp -f -a 1E-2 -i EXAFEL-LCLS-986x32x185x388.f32 -z EXAFEL-LCLS-986x32x185x388.f32.zfp -o EXAFEL-LCLS-986x32x185x388.f32.zfp.out -2 388 5837120 -s
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i EXAFEL-LCLS-986x32x185x388.f32 -d 5837120 -d 388 -t float -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -f REL EXAFEL raw-data-dir f32 388 5837120</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="hacc">
+  <div class="card-header">
+    <h3>HACC</h3>
+    <span class="badge">Cosmology: particle simulation</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> HACC team (ECP EXASKY)</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>1 snapshot: 6 fields (x, y, z, vx, vy, vz)<br>
+Each field stored separately<br>
+Single precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>Dataset1: 19 GB<br>
+Dataset2: 5 GB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>7.2</td><td>25.3</td></tr>
+<tr><td><strong>min</strong></td><td>7.1</td><td>24.7</td></tr>
+<tr><td><strong>max</strong></td><td>7.4</td><td>25.9</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size.tar.gz">Dataset1</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size-template_data.txt">Metadata1</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size-property.txt">Property1</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size.tar.gz">Dataset2</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size-template_data.txt">Metadata2</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size-property.txt">Property2</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -z -f -i xx.f32 -M ABS -A 0.003 -1 1073726487
+<b>SZ (Decompress):</b> sz -x -f -i xx.f32 -s xx.f32.sz -1 1073726487 -a
+<b>ZFP:</b>              zfp -f -i xx.f32 -z xx.f32.zfp -o xx.f32.zfp.out -a 0.003 -1 1073726487
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i xx.f32 -d 1073726487 -t float -o abs=3e-3 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -f ABS HACC raw-data-dir f32 1073726487</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="nyx">
+  <div class="card-header">
+    <h3>NYX</h3>
+    <span class="badge">Cosmology: Adaptive mesh hydrodynamics + N-body cosmological simulation</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> Lukic et al. "methods: numerical, intergalactic medium, quasars: absorption lines, large-scale structure of universe", journal of Monthly Notices of Royal Astronomical Society</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>6 fields, 3D, 512x512x512<br>
+Single precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>2.7 GB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>7.2</td><td>25.1</td></tr>
+<tr><td><strong>min</strong></td><td>7.0</td><td>24</td></tr>
+<tr><td><strong>max</strong></td><td>7.4</td><td>25.9</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512.tar.gz">Dataset</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/template_data.txt">Metadata</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512-property.txt">Property</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -z -f -i temperature.f32 -M REL -R 1E-2 -3 512 512 512
+<b>SZ (Decompress):</b> sz -x -f -i temperature.f32 -s temperature.f32.sz -3 512 512 512 -a
+<b>ZFP:</b>              zfp -f -i temperature.f32 -z temperature.f32.zfp -o temperature.f32.zfp.out -3 512 512 512 -a 1E-2 -s
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i temperature.f32 -d 512 -d 512 -d 512 -t float -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -f REL NYX raw-data-dir f32 512 512 512</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="nwchem">
+  <div class="card-header">
+    <h3>NWChem</h3>
+    <span class="badge">Two-electron repulsion integrals computed over Gaussian-type orbital basis sets</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> Example molecular 2-electron integral values generated by libint, a library developed by the Valeev research group at Virginia Tech. See https://github.com/evaleev/libint. Libint is an integral evaluation option in NWChemEx. (<a href="https://github.com/evaleev/libint">https://github.com/evaleev/libint</a>)</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>3 fields, 1D<br>
+Double precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>16GB</p>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/SDRBENCH-NWChem-dataset.tar.gz">Dataset</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/template_data.txt">Metadata</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/SDRBENCH-NWChem-dataset-property.txt">Property</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -z -d -i 631-tst.bin.d64 -M REL -R 1E-2 -1 102953248
+<b>SZ (Decompress):</b> sz -x -d -i 631-tst.bin.d64 -s 631-tst.bin.d64.sz -1 102953248 -a
+<b>ZFP:</b>              zfp -d -i 631-tst.bin.d64 -z 631-tst.bin.d64.zfp -o 631-tst.bin.d64.zfp.out -a 1E-2 -1 102953248 -s
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i 631-tst.bin.d64 -d 102953248 -t double -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -d REL NWCHEM raw-data-dir d64 102953248</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="scale-letkf">
+  <div class="card-header">
+    <h3>SCALE-LETKF</h3>
+    <span class="badge">Climate simulation</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> Simulation data generated by The Local Ensemble Transform Kalman Filter (LETKF) data assimilation package for the SCALE-RM weather model (provided by RIKEN). Contact: Guo-yuan Lien (guoyuan.lien@gmail.com)</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>13 fields, 3D<br>
+Single precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>4.9GB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>6.7</td><td>21.7</td></tr>
+<tr><td><strong>min</strong></td><td>4.6</td><td>10.2</td></tr>
+<tr><td><strong>max</strong></td><td>7.4</td><td>26.1</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200.tar.gz">Dataset</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/template_data.txt">Metadata</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200-property.txt">Property</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200_log.tar.gz">Dataset2 (log-scale)</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -f -z -i T-98x1200x1200.f32 -M REL -R 1E-2 -3 1200 1200 98
+<b>SZ (Decompress):</b> sz -f -x -i T-98x1200x1200.f32 -s T-98x1200x1200.f32.sz -3 1200 1200 98 -a
+<b>ZFP:</b>              zfp -f -i T-98x1200x1200.f32 -z T-98x1200x1200.f32.zfp -o T-98x1200x1200.f32.zfp.out -a 1E-2 -3 1200 1200 98 -s
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i T-98x1200x1200.f32 -d 1200 -d 1200 -d 98 -t float -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -f REL SCALE-LETKF raw-data-dir f32 1200 1200 98</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="qmcpack">
+  <div class="card-header">
+    <h3>QMCPACK</h3>
+    <span class="badge">Many-body ab initio Quantum Monte Carlo (electronic structure of atoms, molecules, and solids)</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> QMCPACK performance test (contact: Ye Luo, yeluo@anl.gov)</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>1 field, 288 orbitals, 3D, 69x69x115<br>
+Single precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>1 GB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>value</strong></td><td>7.6</td><td>26.1</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/SDRBENCH-QMCPack.tar.gz">Dataset</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/template_data.txt">Metadata</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/SDRBENCH-QMCPACK-115x69x69x288-property.txt">Property</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -z -f -i einspline_288_115_69_69.pre.f32 -M REL -R 1E-2 -3 69 69 33120
+<b>SZ (Decompress):</b> sz -x -f -i einspline_288_115_69_69.pre.f32 -s einspline_288_115_69_69.pre.f32.sz -3 69 69 33120 -a
+<b>ZFP:</b>              zfp -f -i einspline_288_115_69_69.pre.f32 -z einspline_288_115_69_69.pre.f32.zfp -o einspline_288_115_69_69.pre.f32.zfp.out -a 1E-2 -3 69 69 33120
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i einspline_288_115_69_69.pre.f32 -d 69 -d 69 -d 33120 -t float -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -f REL QMCPack raw-data-dir f32 69 69 33120</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="miranda">
+  <div class="card-header">
+    <h3>Miranda</h3>
+    <span class="badge">Hydrodynamics code for large turbulence simulations</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> Hydrodynamics code for large turbulence simulations (contact: Peter Lindstrom, lindstrom2@llnl.gov)</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>3D, 7 fields, each field is 256x384x384<br>
+Double precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>Small (256x384x384): 1.87GB<br>
+Big (3072x3072x3072): 106GB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>7.1</td><td>22.5</td></tr>
+<tr><td><strong>min</strong></td><td>3.62</td><td>7.2</td></tr>
+<tr><td><strong>max</strong></td><td>7.7</td><td>25.1</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-256x384x384.tar.gz">Dataset (Small)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/template_data-miranda-256x384x384.txt">Metadata (Small)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-256x384x384-property.txt">Property (Small)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-3072x3072x3072.tar.gz">Dataset (Big)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/template_data-miranda-3072x3072x3072.txt">Metadata (Big)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-3072x3072x3072-property.txt">Property (Big)</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -z -d -i density.d64 -M REL -R 1E-2 -3 384 384 256
+<b>SZ (Decompress):</b> sz -x -d -i density.d64 -s density.d64.sz -3 384 384 256 -a
+<b>ZFP:</b>              zfp -d -3 384 384 256 -i density.d64 -z density.d64.zfp -o density.d64.zfp.out -a 1E-2 -s
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i density.d64 -d 384 -d 384 -d 256 -t double -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -d REL Miranda raw-data-dir d64 384 384 256</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="s3d">
+  <div class="card-header">
+    <h3>S3D</h3>
+    <span class="badge">Combustion simulation</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> Kolla, Hemanth (hnkolla@sandia.gov)</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>11 fields, 3D, 500x500x500<br>
+Double precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>44 GB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>7.6</td><td>21.9</td></tr>
+<tr><td><strong>min</strong></td><td>7.6</td><td>21.8</td></tr>
+<tr><td><strong>max</strong></td><td>7.6</td><td>22</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/SDRBENCH-S3D.tar.gz">Dataset</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/template.txt">Metadata</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/SDRBENCH-S3D-property.txt">Property</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -d -z -i stat_planar.1.1000E-03.field.d64 -M REL -R 1E-2 -3 500 500 500
+<b>SZ (Decompress):</b> sz -d -x -i stat_planar.1.1000E-03.field.d64 -s stat_planar.1.1000E-03.field.d64.sz -3 500 500 500 -a
+<b>ZFP:</b>              zfp -d -3 500 500 500 -i stat_planar.1.1000E-03.field.d64 -z stat_planar.1.1000E-03.field.d64.zfp -o stat_planar.1.1000E-03.field.d64.zfp.out -a 1E-2 -s
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i stat_planar.1.1000E-03.field.d64 -d 500 -d 500 -d 500 -t double -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -f REL S3D raw-data-dir f32 500 500 500</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="basilisk-turbulence">
+  <div class="card-header">
+    <h3>Basilisk-Turbulence</h3>
+    <span class="badge">2D decaying turbulence simulation</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> M. Xia, Y. Li, P. Jiao, B. Wang, X. Liang and H. Guo, "Time-Varying Vector Field Compression with Preserved Critical Point Trajectories," 2026 IEEE 42nd International Conference on Data Engineering (ICDE), Montreal, QC, Canada, 2026, pp. 2235-2249, doi: 10.1109/ICDE65706.2026.00168 (<a href="http://basilisk.fr/">http://basilisk.fr/</a>)</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>4 fields, 3D<br>
+1501x1024x1024 & 1001x2048x2048<br>
+u_1024x1024x1501Re10k.f32<br>
+v_1024x1024x1501Re10k.f32<br>
+u_2048x2048x1001Re10k.f32<br>
+v_2048x2048x1001Re10k.f32<br>
+Single precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>40GB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>7.36</td><td>26.45</td></tr>
+<tr><td><strong>min</strong></td><td>7.35</td><td>26.39</td></tr>
+<tr><td><strong>max</strong></td><td>7.38</td><td>26.53</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/SDRBENCH-Basilisk-Turbulence.tar.gz">Dataset</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/metadata_1024x1024x1501Re10k.txt">Metadata1 (1501x1024x1024)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/metadata_2048x2048x1001Re10k.txt">Metadata2 (1001x2048x2048)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/README.txt">README</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/SDRBENCH-Basilisk-Turbulence-property.txt">Property</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -f -z -i u_1024x1024x1501Re10k.f32 -M REL -R 1E-3 -3 1024 1024 1501
+<b>SZ (Decompress):</b> sz -f -x -i u_1024x1024x1501Re10k.f32 -s u_1024x1024x1501Re10k.f32.sz -3 1024 1024 1501 -a
+<b>ZFP:</b>              zfp -f -3 1024 1024 1501 -i u_1024x1024x1501Re10k.f32 -z u_1024x1024x1501Re10k.f32.zfp -o u_1024x1024x1501Re10k.f32.zfp.out -a 1E-3 -s</code></pre>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="xgc">
+  <div class="card-header">
+    <h3>XGC</h3>
+    <span class="badge">Fusion Simulation</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> Princeton Plasma Physics Laboratory (PPPL) (<a href="https://jychoi-hpc.github.io/adios-python-docs/XGC-mesh-and-field-data.html">https://jychoi-hpc.github.io/adios-python-docs/XGC-mesh-and-field-data.html</a>)</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>9 timesteps, 3D, unstructured mesh<br>
+(the mesh data is in the archive)<br>
+20694x512<br>
+Double precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>1.2 GB</p>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.3d.tar.gz">Dataset (Adios2)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.zip">Dataset (binary)</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/template_data.txt">Metadata</a>
+      </div>
+    </div>
+
+    <div class="info-box"><p>The files are stored in .bp format, you need to install ADIOS to read them.</p></div>
+  </div>
+</div>
+
+<div class="card" id="nstx-gpi">
+  <div class="card-header">
+    <h3>NSTX GPI</h3>
+    <span class="badge">Fusion Gas Puff Image (GPI) data</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> Michael Churchill, Princeton Plasma Physics Laboratory (PPPL). Copyright: Free to use but need to check with Michael Churchill (rchurchi@pppl.gov) before publishing results.</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>369,357 steps<br>
+2D time-series data (movie), 80x64 image<br>
+Double precision, binary, little-endian</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>4.1 GB</p>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NSTX_GPI/nstx_data_ornl_demo.bp">Dataset</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NSTX_GPI/template_data.txt">Metadata</a>
+      </div>
+    </div>
+
+    <div class="info-box"><p>The files are stored in .bp format, you need to install ADIOS to read them.</p></div>
+  </div>
+</div>
+
+<div class="card" id="brown-samples">
+  <div class="card-header">
+    <h3>Brown Samples</h3>
+    <span class="badge">Synthetic, generated to specified regularity</span>
+  </div>
+  <div class="card-body">
+    <p class="source-info"><strong>Source:</strong> Brown University</p>
+    
+
+    <div class="dataset-grid">
+      <div>
+        <div class="detail-group">
+          <h4>Format</h4>
+          <p>1D, double precision, binary, little-endian<br>
+(3 datasets with 3 different regularity)</p>
+        </div>
+        <div class="detail-group">
+          <h4>Size</h4>
+          <p>256 MB<br>
+256 MB<br>
+256 MB</p>
+        </div>
+      </div>
+      <div>
+        <div class="detail-group">
+          <h4>Entropy</h4>
+          <table class="entropy-table">
+<tr><th></th><th>8-bit Entropy</th><th>32-bit Entropy</th></tr>
+<tr><td><strong>avg</strong></td><td>7.5</td><td>23</td></tr>
+<tr><td><strong>min</strong></td><td>7.5</td><td>23</td></tr>
+<tr><td><strong>max</strong></td><td>7.6</td><td>23</td></tr>
+</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-group">
+      <h4>Download Links</h4>
+      <div class="download-links">
+        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/brown_synth/SDRBENCH-BROWN-33554433.tar.gz">Dataset</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/brown_synth/template_data.txt">Metadata</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/brown_synth/SDRBENCH-BROWN-33554433-property.txt">Property</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>Command Examples</summary>
+<pre><code><b>SZ (Compress):</b>   sz -z -d -i sample_r_B_0.5_26.d64 -M REL -R 1E-2 -1 33554433
+<b>SZ (Decompress):</b> sz -x -d -i sample_r_B_0.5_26.d64 -s sample_r_B_0.5_26.d64.sz -1 33554433 -a
+<b>ZFP:</b>              zfp -d -1 33554433 -i sample_r_B_0.5_26.d64 -z sample_r_B_0.5_26.d64.zfp -o sample_r_B_0.5_26.d64.zfp.out -a 1E-2 -s
+<b>LibPressio:</b>       pressio -b compressor=$COMP -i sample_r_B_0.5_26.d64 -d 33554433 -t double -o rel=1e-2 -m time -m size -M all
+                      where $COMP can be sz, zfp, sz3, mgard, etc.
+<b>Z-checker:</b>        ./runZCCase.sh -d REL Brown-samples raw-data-dir d64 33554433</code></pre>
+    </details>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <p>SDRBench &mdash; Scientific Data Reduction Benchmarks</p>
+  <p>Established as part of the <a href="https://www.exascaleproject.org/">ECP</a> <a href="https://www.exascaleproject.org/project/codar-co-design-center-online-data-analysis-reduction-exascale/">CODAR</a> project.</p>
+</footer>
+
+</body>
+</html>

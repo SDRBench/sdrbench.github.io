@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Home - SDRBench</title>
+  <title>Publications - SDRBench</title>
   <meta name="description" content="Scientific Data Reduction Benchmarks">
   <style>
     :root {
@@ -401,69 +401,122 @@
     <a href="index.html" class="site-title">SDRBench</a>
     <button class="hamburger" onclick="document.getElementById('nav-menu').classList.toggle('open')">&#9776;</button>
     <ul id="nav-menu">
-      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="datasets.html">Datasets</a></li>
       <li><a href="tools.html">Tools</a></li>
-      <li><a href="publications.html">Publications</a></li>
+      <li><a href="publications.html" class="active">Publications</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="hero">
-  <h1>Scientific Data Reduction Benchmarks</h1>
-  <p>Reference scientific datasets, data reduction techniques, error metrics, error controls, and error assessment tools for users and developers of scientific data reduction techniques.</p>
+<div class="page-header">
+  <div class="content">
+    <h1>Publications</h1>
+    <p>Selected publications related to compression benchmarking, compression estimation, and compression survey/analysis.</p>
+  </div>
 </div>
 
 <div class="content">
-<p>This site has been established as part of the <a href="https://www.exascaleproject.org/">ECP</a> <a href="https://www.exascaleproject.org/project/codar-co-design-center-online-data-analysis-reduction-exascale/">CODAR</a> project. It provides reference scientific datasets, data reduction techniques, error metrics, error controls, and error assessment tools for users and developers of scientific data reduction techniques.</p>
-<div class="alert">
-<h3>Important: When publishing results from one or more datasets presented in this website, please:</h3>
+<h2>Compression Survey</h2>
 <ul>
-<li><strong>Cite</strong>: SDRBench -- <em>https://sdrbench.github.io</em></li>
-<li><strong>Please also cite</strong>: K. Zhao, S. Di, X. Liang, S. Li, D. Tao, J. Bessac, Z. Chen, and F. Cappello, "SDRBench: Scientific Data Reduction Benchmark for Lossy Compressors", International Workshop on Big Data Reduction (IWBDR2020), in conjunction with IEEE Bigdata20.</li>
-<li><strong>Acknowledge</strong>: the source of the dataset you used, the DOE NNSA ECP project, and the ECP CODAR project.</li>
-<li><strong>Check</strong>: the condition of publications (some dataset sources request prior check).</li>
-<li><strong>Contact</strong>: the compressor authors to get the correct compressor configuration according to each dataset and each comparison metrics.</li>
+<li>
+<p>S. Di, J. Liu, K. Zhao, X. Liang, R. Underwood, et al., "A Survey on Error-Bounded Lossy Compression for Scientific Datasets", <em>ACM Computing Surveys (ACM CSUR)</em>, 2025. <a href="https://dl.acm.org/doi/10.1145/3733104">pdf</a></p>
+</li>
+<li>
+<p>F. Cappello, R. Underwood, Y. Alexeev, A. Baker, E. Bozdag, M. Burtscher, K. Chard, S. Di, et al., "What to Support: When You are Compressing: The State of Practice, Gaps, and Opportunities for Scientific Data Compression", <em>IEEE/ACM SC2025</em>, 2025. <a href="https://dl.acm.org/doi/10.1145/3712285.3759856">pdf</a></p>
+</li>
+<li>
+<p>F. Cappello, M. Acosta, E. Agullo, H. Anzt, J. Calhoun, S. Di, et al., "Multifacets of lossy compression for scientific data in the Joint-Laboratory of Extreme Scale Computing", <em>Future Generation Computer Systems (FGCS)</em>, 2024. <a href="https://www.sciencedirect.com/science/article/pii/S2210537917300896">pdf</a></p>
+</li>
+<li>
+<p>I. Foster, M. Ainsworth, J. Bessac, F. Cappello, J. Choi, S. Di, et al., "Online data analysis and reduction: An important Co-design motif for extreme-scale computers", <em>The International Journal of High Performance Computing Applications (IJHPCA)</em>, 2022. <a href="https://journals.sagepub.com/doi/10.1177/10943420211023549">pdf</a></p>
+</li>
+<li>
+<p>F. Cappello, S. Di, A. M. Gok, "Fulfilling the Promises of Lossy Compression for Scientific Applications", <em>Smoky Mountain Computational Science and Engineering Conference (SMC2020)</em>, 2020. <a href="https://link.springer.com/chapter/10.1007/978-3-030-63393-6_7">pdf</a></p>
+</li>
+<li>
+<p>F. Cappello, S. Di, S. Li, X. Liang, A. M. Gok, D. Tao, C. H. Yoon, X.-C. Wu, Y. Alexeev, F. T. Chong, "Use cases of lossy compression for floating-point data in scientific datasets", <em>The International Journal of High Performance Computing Applications (IJHPCA)</em>, 2019. <a href="https://journals.sagepub.com/doi/10.1177/1094342019853336">pdf</a></p>
+</li>
 </ul>
-</div>
-<div class="info-box">
-<p><strong>Dimension ordering note:</strong> The order of the dimensions shown in the "Format" column of the dataset table is in row-major order (C order), consistent with well-known I/O libraries such as HDF5. For example, for the CESM-ATM dataset (1800 x 3600), 1800 is the higher dimension (changing slower) and 3600 is the lower dimension (changing faster). For most compressors (such as SZ, ZFP, and FPZIP), the dimensions should be given in the reverse order (such as <code>-2 3600 1800</code>) for their executables. If you are not sure about the order of dimensions, one simple method is trying different dimension orders and selecting the results with highest compression ratios.</p>
-</div>
-<h2>File Extension Conventions</h2>
-<table>
-<thead>
-<tr>
-<th>Extension</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>.f32</code></td>
-<td>Single-precision floating point data, little-endian</td>
-</tr>
-<tr>
-<td><code>.F32</code></td>
-<td>Single-precision floating point data, big-endian</td>
-</tr>
-<tr>
-<td><code>.f64</code></td>
-<td>Double-precision floating point data, little-endian</td>
-</tr>
-<tr>
-<td><code>.F64</code></td>
-<td>Double-precision floating point data, big-endian</td>
-</tr>
-</tbody>
-</table>
-<h2>Submit a Dataset</h2>
-<p>Please submit your proposal of datasets to <strong>codar-reduction (at) cels.anl.gov</strong>.</p>
-<p><strong>Requirements:</strong>
-- Datasets must be open to public access
-- Dataset should be linked to a simulation application or a scientific instrument
-- Metadata should explain the source origin of the dataset and how it has been produced (what simulation, what instrument, what settings)
-- Upon review by the SDRBenchmarks committee, the dataset will (or will not) be added to the SDRBenchmarks repository</p>
+<h2>Compression Benchmark &amp; Analysis</h2>
+<ul>
+<li>
+<p>Z. Qiu, J. Liu, K. Zhao, R. Underwood, S. Di, "Benchmarking Cutting-Edge Scientific Error-Bounded Lossy Compressors on Correlation-Based Rate-Distortion", <em>DRBSD Workshop at IEEE/ACM SC2025</em>, 2025. <a href="https://dl.acm.org/doi/10.1145/3731599.3767375">pdf</a> <strong>best paper runner-up</strong></p>
+</li>
+<li>
+<p>S. Sinha, S. Di, V. Rao, R. Underwood, D. Lenz, Z. Jian, Z. Yang, K. Zhao, L. Liu, F. Cappello, "Bridging Information Theory and Practice for Scientific Lossy Compression", <em>ACM HPDC2026</em>, 2026.</p>
+</li>
+<li>
+<p>G. Wilkins, S. Di, J. Calhoun, R. Underwood, and F. Cappello, "To Compress or Not To Compress: Energy and Runtime Trade-Offs in Lossy Compressed I/O", <em>IEEE IPDPS2025</em>, 2025. <a href="https://ieeexplore.ieee.org/document/11078519">pdf</a></p>
+</li>
+<li>
+<p>Z. Su, S. Di, A. M. Gok, Y. Cheng, F. Cappello, "Understanding Impact of Lossy Compression on Derivative-related Metrics in Scientific Datasets", <em>DRBSD Workshop at IEEE/ACM SC2022</em>, 2022. <a href="https://ieeexplore.ieee.org/document/10025499">pdf</a></p>
+</li>
+<li>
+<p>R. Underwood, J. Bessac, S. Di, F. Cappello, "Understanding the Effects of Modern Compressors on the Community Earth Science Model", <em>DRBSD Workshop at IEEE/ACM SC2022</em>, 2022. <a href="https://ieeexplore.ieee.org/document/10025480">pdf</a> <strong>best paper award</strong></p>
+</li>
+<li>
+<p>Y. Liu, S. Di, K. Zhao, S. Jin, C. Wang, K. Chard, D. Tao, I. Foster, F. Cappello, "Understanding Effectiveness of Multi-error-bounded Lossy Compression for Preserving Ranges of Interest in Scientific Analysis", <em>DRBSD Workshop at IEEE/ACM SC2021</em>, 2021. <a href="https://ieeexplore.ieee.org/document/9652577">pdf</a></p>
+</li>
+<li>
+<p>D. Krasowska, J. Bessac, R. Underwood, J. C. Calhoun, S. Di, F. Cappello, "Exploring Lossy Compressibility through Statistical Correlations of Scientific Datasets", <em>DRBSD Workshop at IEEE/ACM SC2021</em>, 2021. <a href="https://ieeexplore.ieee.org/abstract/document/9652575">pdf</a></p>
+</li>
+<li>
+<p>K. Zhao, S. Di, X. Liang, S. Li, D. Tao, J. Bessac, Z. Chen, F. Cappello, "SDRBench: Scientific Data Reduction Benchmark for Lossy Compressors", <em>International Workshop on Big Data Reduction (IEEE IWBDR20) at IEEE BigData20</em>, 2020. <a href="https://ieeexplore.ieee.org/document/9378449">pdf</a></p>
+</li>
+<li>
+<p>D. Tao, S. Di, X. Liang, Z. Chen, F. Cappello, "Optimizing Lossy Compression Rate-Distortion from Automatic Online Selection between SZ and ZFP", <em>IEEE Transactions on Parallel and Distributed Systems (IEEE TPDS)</em>, 2019. <a href="https://ieeexplore.ieee.org/document/8621017">pdf</a></p>
+</li>
+<li>
+<p>D. Tao, S. Di, Z. Chen, and F. Cappello, "In-Depth Exploration of Single-Snapshot Lossy Compression Techniques for N-Body Simulations", <em>IEEE BigData2017</em>, 2017. <a href="https://www.semanticscholar.org/paper/In-depth-exploration-of-single-snapshot-lossy-for-Tao-Di/c45c10b0b358b30a157491f5f5a13f6eb590f325">pdf</a></p>
+</li>
+<li>
+<p>D. Tao, S. Di, H. Guo, Z. Chen, and F. Cappello, "Z-checker: A Framework for Assessing Lossy Compression of Scientific Data", <em>The International Journal of High Performance Computing Applications (IJHPCA)</em>, 2017. <a href="https://dl.acm.org/doi/10.1177/1094342017737147">pdf</a></p>
+</li>
+</ul>
+<h2>Compression Estimation</h2>
+<ul>
+<li>
+<p>K. M. Mumenin, R. Underwood, D. Dai, J. Wang, S. Di, Z. Lukic, and F. Cappello, "DeepCQ: A Two-Stage Deep-Surrogate Framework for Lossy Compression Quality Prediction", <em>IEEE CLUSTER2026</em>, 2026.</p>
+</li>
+<li>
+<p>A. Khan, S. Di, K. Zhao, J. Liu, K. Chard, I. Foster, and F. Cappello, "SLyCE: An Efficient Surrogate-based Lossy Compression Quality Estimation Framework", <em>IEEE Transactions on Big Data (IEEE TBD)</em>, 2023. <a href="https://www.computer.org/csdl/journal/bd/5555/01/11614759/2ihnGquDcTm">pdf</a></p>
+</li>
+<li>
+<p>A. Poulos, R. Underwood, J. C. Calhoun, S. Di, and F. Cappello, "Sensitivity and Impacts on Parallel Compression of Prediction of Lossy Compression Ratios for Scientific Data", <em>IEEE IPDPS2025</em>, 2025. <a href="https://ieeexplore.ieee.org/document/11078571">pdf</a></p>
+</li>
+<li>
+<p>M. H. Rahman, S. Di, G. Li, F. Cappello, "Modeling Rate-Distortion for Endpoint-Aware Lossy Compression in Scientific Data Transfer", <em>IEEE IPCCC2025</em>, 2025. <a href="https://ieeexplore.ieee.org/document/11304680">pdf</a></p>
+</li>
+<li>
+<p>M. H. Rahman, S. Di, G. Li, and F. Cappello, "Characterizing Spatial Data Traits for Modeling Generic Lossy Rate-Distortion Quality", <em>IEEE IPDPS2025</em>, 2025. [poster]</p>
+</li>
+<li>
+<p>M. H. Rahman, S. Di, G. Li, F. Cappello, "A Generic and Efficient Framework for Estimating Lossy Compressibility of Scientific Data", <em>IEEE MSST2024</em>, 2024. <a href="https://www.researchgate.net/publication/381798098_A_Generic_and_Efficient_Framework_for_Estimating_Lossy_Compressibility_of_Scientific_Data">pdf</a></p>
+</li>
+<li>
+<p>A. Khan, S. Di, K. Zhao, J. Liu, K. Chard, I. Foster, F. Cappello, "SECRE: Surrogate-based Error-controlled Lossy Compression Ratio Estimation Framework", <em>HiPC2023</em>, 2023. <a href="https://ieeexplore.ieee.org/document/10487057">pdf</a></p>
+</li>
+<li>
+<p>R. R. Underwood, S. Di, S. Jin, M. H. Rahman, A. Khan, F. Cappello, "LibPressio-Predict: Flexible and Fast Infrastructure for Inferring Compression Performance", <em>DRBSD Workshop at IEEE/ACM SC2023</em>, 2023. <a href="https://dl.acm.org/doi/10.1145/3624062.3625124">pdf</a></p>
+</li>
+<li>
+<p>R. Underwood, J. Bessac, D. Krasowska, J. C. Calhoun, S. Di, F. Cappello, "Black-box statistical prediction of lossy compression ratios for scientific data", <em>International Journal of High Performance Computing Applications (IJHPCA)</em>, 2023. <a href="https://journals.sagepub.com/doi/full/10.1177/10943420231179417">pdf</a></p>
+</li>
+<li>
+<p>A. Ganguli, R. Underwood, J. Bessac, D. Krasowska, J. Calhoun, S. Di, F. Cappello, "A Lightweight, Effective Compressibility Estimation Method for Error-bounded Lossy Compression", <em>IEEE CLUSTER2023</em>, 2023. <a href="https://ieeexplore.ieee.org/document/10319944">pdf</a></p>
+</li>
+<li>
+<p>A. Khan, S. Di, K. Zhao, J. Liu, K. Chard, I. Foster, F. Cappello, "An Efficient and Accurate Compression Ratio Estimation Model for SZx", <em>IEEE CLUSTER2023</em>, 2023. <a href="https://ieeexplore.ieee.org/document/10487057">pdf</a> <strong>best poster award</strong></p>
+</li>
+<li>
+<p>D. Krasowska, R. Underwood, J. Bessac, J. Calhoun, S. Di, F. Cappello, "Statistical Prediction of Lossy Compression Ratios for 3D Scientific Data", <em>IEEE/ACM SC2022</em>, 2022. <strong>1st place ACM SRC -- Undergraduates</strong></p>
+</li>
+<li>
+<p>M. H. Rahman, S. Di, K. Zhao, R. Underwood, G. Li, F. Cappello, "A Feature-Driven Fixed-Ratio Lossy Compression Framework for Real-World Scientific Datasets", <em>IEEE ICDE2023</em>, 2023. <a href="https://ieeexplore.ieee.org/document/10184704">pdf</a></p>
+</li>
+</ul>
 </div>
 
 <footer>

@@ -1,0 +1,16 @@
+title: SDRBench
+description: Scientific Data Reduction Benchmarks
+url: "https://sdrbench.github.io"
+baseurl: ""
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+exclude:
+  - test.sh
+  - "*.bk"
+  - _old_index.html
+
+plugins:
+  - jekyll-seo-tag

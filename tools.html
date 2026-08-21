@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Home - SDRBench</title>
+  <title>Tools - SDRBench</title>
   <meta name="description" content="Scientific Data Reduction Benchmarks">
   <style>
     :root {
@@ -401,69 +401,176 @@
     <a href="index.html" class="site-title">SDRBench</a>
     <button class="hamburger" onclick="document.getElementById('nav-menu').classList.toggle('open')">&#9776;</button>
     <ul id="nav-menu">
-      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="datasets.html">Datasets</a></li>
-      <li><a href="tools.html">Tools</a></li>
+      <li><a href="tools.html" class="active">Tools</a></li>
       <li><a href="publications.html">Publications</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="hero">
-  <h1>Scientific Data Reduction Benchmarks</h1>
-  <p>Reference scientific datasets, data reduction techniques, error metrics, error controls, and error assessment tools for users and developers of scientific data reduction techniques.</p>
+<div class="page-header">
+  <div class="content">
+    <h1>Tools & Compressors</h1>
+    <p>Lossy and lossless compressors, assessment metrics, error controls, and evaluation tools.</p>
+  </div>
 </div>
 
 <div class="content">
-<p>This site has been established as part of the <a href="https://www.exascaleproject.org/">ECP</a> <a href="https://www.exascaleproject.org/project/codar-co-design-center-online-data-analysis-reduction-exascale/">CODAR</a> project. It provides reference scientific datasets, data reduction techniques, error metrics, error controls, and error assessment tools for users and developers of scientific data reduction techniques.</p>
-<div class="alert">
-<h3>Important: When publishing results from one or more datasets presented in this website, please:</h3>
-<ul>
-<li><strong>Cite</strong>: SDRBench -- <em>https://sdrbench.github.io</em></li>
-<li><strong>Please also cite</strong>: K. Zhao, S. Di, X. Liang, S. Li, D. Tao, J. Bessac, Z. Chen, and F. Cappello, "SDRBench: Scientific Data Reduction Benchmark for Lossy Compressors", International Workshop on Big Data Reduction (IWBDR2020), in conjunction with IEEE Bigdata20.</li>
-<li><strong>Acknowledge</strong>: the source of the dataset you used, the DOE NNSA ECP project, and the ECP CODAR project.</li>
-<li><strong>Check</strong>: the condition of publications (some dataset sources request prior check).</li>
-<li><strong>Contact</strong>: the compressor authors to get the correct compressor configuration according to each dataset and each comparison metrics.</li>
-</ul>
-</div>
-<div class="info-box">
-<p><strong>Dimension ordering note:</strong> The order of the dimensions shown in the "Format" column of the dataset table is in row-major order (C order), consistent with well-known I/O libraries such as HDF5. For example, for the CESM-ATM dataset (1800 x 3600), 1800 is the higher dimension (changing slower) and 3600 is the lower dimension (changing faster). For most compressors (such as SZ, ZFP, and FPZIP), the dimensions should be given in the reverse order (such as <code>-2 3600 1800</code>) for their executables. If you are not sure about the order of dimensions, one simple method is trying different dimension orders and selecting the results with highest compression ratios.</p>
-</div>
-<h2>File Extension Conventions</h2>
+<h2>Lossy Compressors</h2>
 <table>
 <thead>
 <tr>
-<th>Extension</th>
-<th>Description</th>
+<th>Compressor</th>
+<th>Link</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>.f32</code></td>
-<td>Single-precision floating point data, little-endian</td>
+<td>SZ</td>
+<td><a href="https://github.com/szcompressor/SZ">https://github.com/szcompressor/SZ</a></td>
 </tr>
 <tr>
-<td><code>.F32</code></td>
-<td>Single-precision floating point data, big-endian</td>
+<td>ZFP</td>
+<td><a href="https://github.com/LLNL/zfp">https://github.com/LLNL/zfp</a></td>
 </tr>
 <tr>
-<td><code>.f64</code></td>
-<td>Double-precision floating point data, little-endian</td>
+<td>TTHRESH</td>
+<td><a href="https://github.com/rballester/tthresh">https://github.com/rballester/tthresh</a></td>
 </tr>
 <tr>
-<td><code>.F64</code></td>
-<td>Double-precision floating point data, big-endian</td>
+<td>MGARD</td>
+<td><a href="https://github.com/CODARcode/MGARD">https://github.com/CODARcode/MGARD</a></td>
+</tr>
+<tr>
+<td>SPERR</td>
+<td><a href="https://github.com/NCAR/SPERR">https://github.com/NCAR/SPERR</a></td>
+</tr>
+<tr>
+<td>ISABELA</td>
+<td><a href="http://freescience.org/cs/ISABELA/ISABELA.html">http://freescience.org/cs/ISABELA/ISABELA.html</a></td>
+</tr>
+<tr>
+<td>PFPL</td>
+<td><a href="https://github.com/burtscher/PFPL">https://github.com/burtscher/PFPL</a></td>
+</tr>
+<tr>
+<td>DCTZ</td>
+<td><a href="https://github.com/swson/DCTZ">https://github.com/swson/DCTZ</a></td>
+</tr>
+<tr>
+<td>Digit Rounding</td>
+<td><a href="https://github.com/CNES/Digit_Rounding">https://github.com/CNES/Digit_Rounding</a> (standalone: <a href="https://github.com/disheng222/digitroundingZ">digitroundingZ</a>)</td>
+</tr>
+<tr>
+<td>Bit Grooming</td>
+<td><a href="https://github.com/nco/nco">https://github.com/nco/nco</a> (standalone: <a href="https://github.com/disheng222/BitGroomingZ.git">BitGroomingZ</a>)</td>
 </tr>
 </tbody>
 </table>
-<h2>Submit a Dataset</h2>
-<p>Please submit your proposal of datasets to <strong>codar-reduction (at) cels.anl.gov</strong>.</p>
-<p><strong>Requirements:</strong>
-- Datasets must be open to public access
-- Dataset should be linked to a simulation application or a scientific instrument
-- Metadata should explain the source origin of the dataset and how it has been produced (what simulation, what instrument, what settings)
-- Upon review by the SDRBenchmarks committee, the dataset will (or will not) be added to the SDRBenchmarks repository</p>
+<p><em>Others: please submit your suggestion of lossy compressor, with GitHub link to </em><em>codar-reduction (at) cels.anl.gov</em><em>.</em></p>
+<h2>Lossless Compressors</h2>
+<table>
+<thead>
+<tr>
+<th>Compressor</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FPZIP</td>
+<td><a href="https://computation.llnl.gov/projects/floating-point-compression">https://computation.llnl.gov/projects/floating-point-compression</a></td>
+</tr>
+<tr>
+<td>ZFP</td>
+<td><a href="https://github.com/LLNL/zfp">https://github.com/LLNL/zfp</a></td>
+</tr>
+<tr>
+<td>FPC</td>
+<td><a href="http://cs.txstate.edu/~burtscher/research/FPC/">http://cs.txstate.edu/~burtscher/research/FPC/</a></td>
+</tr>
+<tr>
+<td>pFPC (parallel)</td>
+<td><a href="http://cs.txstate.edu/~burtscher/research/pFPC/">http://cs.txstate.edu/~burtscher/research/pFPC/</a></td>
+</tr>
+<tr>
+<td>SPDP</td>
+<td><a href="http://cs.txstate.edu/~burtscher/research/SPDP/">http://cs.txstate.edu/~burtscher/research/SPDP/</a></td>
+</tr>
+<tr>
+<td>GFC (GPUs)</td>
+<td><a href="http://cs.txstate.edu/~burtscher/research/GFC/">http://cs.txstate.edu/~burtscher/research/GFC/</a></td>
+</tr>
+<tr>
+<td>MPC (GPUs)</td>
+<td><a href="http://cs.txstate.edu/~burtscher/research/MPC/">http://cs.txstate.edu/~burtscher/research/MPC/</a></td>
+</tr>
+<tr>
+<td>BLOSC</td>
+<td><a href="https://github.com/Blosc/c-blosc">https://github.com/Blosc/c-blosc</a></td>
+</tr>
+<tr>
+<td>FPcompress</td>
+<td><a href="https://github.com/burtscher/FPcompress/">https://github.com/burtscher/FPcompress/</a></td>
+</tr>
+</tbody>
+</table>
+<p><em>Others: please submit your suggestion of lossless compressor, with GitHub link to </em><em>codar-reduction (at) cels.anl.gov</em><em>.</em></p>
+<h2>Unifying Generic Interface for Compression</h2>
+<ul>
+<li><strong>LibPressio</strong> (lossy and lossless): <a href="https://robertu94.github.io/libpressio/">https://robertu94.github.io/libpressio/</a></li>
+</ul>
+<h2>Assessment Metrics</h2>
+<p>Commonly used metrics for reduction technique assessment:</p>
+<ul>
+<li>Reduction/reconstruction rate in [G|M|K]B/s</li>
+<li>Reduction ratio (initial size / compressed size)</li>
+<li>[Lossy] Rate distortion (PSNR at different bit rates)</li>
+<li>[Lossy] PSNR in dB, MSE, RMSE, and NRMSE</li>
+<li>[Lossy] SSIM (structural similarity index)</li>
+<li>[Lossy] Pearson correlation of the initial and reconstructed dataset</li>
+<li>[Lossy] Autocorrelation of the compression error (1D, ... nD)</li>
+<li>[Lossy] Spectral alteration (difference of power spectrum)</li>
+<li>[Lossy] Preservation of the n-order derivatives</li>
+</ul>
+<p><em>Others: please submit your suggestion of assessment metric to </em><em>codar-reduction (at) cels.anl.gov</em><em>.</em></p>
+<h2>Error Controls</h2>
+<ul>
+<li>[Common] Point-wise absolute error bound</li>
+<li>[Common] Point-wise relative error bound</li>
+<li>[Variation] Value range point-wise relative error bound</li>
+<li>[Other] Fixed PSNR</li>
+</ul>
+<h2>Assessment Tools</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Z-checker</td>
+<td><a href="https://github.com/CODARcode/Z-checker">https://github.com/CODARcode/Z-checker</a></td>
+</tr>
+<tr>
+<td>Foresight</td>
+<td><a href="https://github.com/lanl/VizAly-Foresight">https://github.com/lanl/VizAly-Foresight</a></td>
+</tr>
+<tr>
+<td>ldcpy</td>
+<td><a href="https://github.com/NCAR/ldcpy">https://github.com/NCAR/ldcpy</a></td>
+</tr>
+<tr>
+<td>SFS</td>
+<td><a href="https://github.com/JulianKunkel/statistical-file-scanner">https://github.com/JulianKunkel/statistical-file-scanner</a></td>
+</tr>
+</tbody>
+</table>
+<p><em>Others: please submit your suggestion of assessment tools, with GitHub link to </em><em>codar-reduction (at) cels.anl.gov</em><em>.</em></p>
 </div>
 
 <footer>
