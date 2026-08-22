@@ -189,7 +189,9 @@
         - { stat: "min", e8: "7.0", e32: "24.0" }
         - { stat: "max", e8: "7.4", e32: "25.9" }
 
-  size: "Dataset1 2.7 GB" "Dataset1(log) 2.7 GB"
+  size: |
+    Dataset1: 2.7 GB
+    Dataset1(log): 2.7 GB
 
   commands:
     sz_compress: "sz -z -f -i temperature.f32 -M REL -R 1E-2 -3 512 512 512"
