@@ -147,14 +147,20 @@
     Each field stored separately
     Single precision, binary, little-endian
   entropy:
-    - label: ""
+    - label: "Dataset1"
       rows:
         - { stat: "avg", e8: "7.2", e32: "25.3" }
         - { stat: "min", e8: "7.1", e32: "24.7" }
         - { stat: "max", e8: "7.4", e32: "25.9" }
+    - label: "Dataset3 (potentially super big)"
+      rows:
+        - { stat: "avg", e8: "6.6", e32: "20.6" }
+        - { stat: "min", e8: "6.5", e32: "19.0" }
+        - { stat: "max", e8: "6.8", e32: "21.5" }
   size: |
     Dataset1: 19 GB
     Dataset2: 5 GB
+    Dataset3: 18.12GB
   commands:
     sz_compress: "sz -z -f -i xx.f32 -M ABS -A 0.003 -1 1073726487"
     sz_decompress: "sz -x -f -i xx.f32 -s xx.f32.sz -1 1073726487 -a"
@@ -169,6 +175,9 @@
     - { label: "Dataset2", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size.tar.gz" }
     - { label: "Metadata2", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size-template_data.txt" }
     - { label: "Property2", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size-property.txt" }
+    #- { label: "Dataset3", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/SDRBENCH-EXASKY-HACC-data-sbig-size.tar.gz" }
+    #- { label: "Metadata3", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-sbig-size-template_data.txt" }
+    #- { label: "Property3", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-sbig-size-property.txt" }
 
 - name: "NYX"
   source: 'Zarija Lukic (LBL, Berkeley)'
