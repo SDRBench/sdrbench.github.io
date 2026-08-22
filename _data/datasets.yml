@@ -12,6 +12,7 @@
         - { stat: "avg", e8: "6.5", e32: "19.8" }
         - { stat: "min", e8: "1.5", e32: "2.3" }
         - { stat: "max", e8: "7.8", e32: "22.6" }
+
   size: |
     Dataset1 (raw): 1.47GB
     Dataset1 (cleared): 1.47GB
@@ -177,12 +178,19 @@
     6 fields, 3D, 512x512x512
     Single precision, binary, little-endian
   entropy:
-    - label: ""
+    - label: "Dataset1(512x512x512)"
       rows:
         - { stat: "avg", e8: "7.2", e32: "25.1" }
         - { stat: "min", e8: "7.0", e32: "24" }
         - { stat: "max", e8: "7.4", e32: "25.9" }
-  size: "2.7 GB"
+    - label: "Dataset1-log(512x512x512)"
+      rows:
+        - { stat: "avg", e8: "7.3", e32: "25.1" }
+        - { stat: "min", e8: "7.0", e32: "24.0" }
+        - { stat: "max", e8: "7.4", e32: "25.9" }
+
+  size: "Dataset1 2.7 GB" "Dataset1(log) 2.7 GB"
+
   commands:
     sz_compress: "sz -z -f -i temperature.f32 -M REL -R 1E-2 -3 512 512 512"
     sz_decompress: "sz -x -f -i temperature.f32 -s temperature.f32.sz -3 512 512 512 -a"
