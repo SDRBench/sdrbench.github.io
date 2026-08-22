@@ -16,7 +16,7 @@ title: Tools
 
 | Compressor | Link |
 |------------|------|
-| SZ | [https://github.com/szcompressor/SZ](https://github.com/szcompressor/SZ) |
+| SZ | [https://szcompressor.org/](https://szcompressor.org/) |
 | ZFP | [https://github.com/LLNL/zfp](https://github.com/LLNL/zfp) |
 | TTHRESH | [https://github.com/rballester/tthresh](https://github.com/rballester/tthresh) |
 | MGARD | [https://github.com/CODARcode/MGARD](https://github.com/CODARcode/MGARD) |
