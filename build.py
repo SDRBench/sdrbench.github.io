@@ -656,7 +656,10 @@ def build_datasets_page(datasets):
 
 <div class="content">
 
-<p><em>Note: This table will be augmented with metrics that matter for users of these datasets as well as recommended settings for error control (lossy compression).</em></p>
+<p><em>
+<strong>FORMAT:</strong> Describes the data organization, including the number of fields in each data file and the data dimensions.<br>
+<strong>SIZE:</strong> Indicates the file size in bytes. Since most datasets are distributed as compressed .tar.gz archives, SIZE typically refers to the size of the corresponding .tar.gz file.
+</em></p>
 
 {cards}
 
