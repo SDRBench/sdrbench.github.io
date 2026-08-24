@@ -89,12 +89,91 @@
     Single precision, binary
     (cleared dataset by replacing background by 0)
   entropy:
-    - label: ""
+    - label: "Snapshot48(all 13 fields)"
       rows:
         - { stat: "avg", e8: "5.9", e32: "18.9" }
         - { stat: "min", e8: "0.7", e32: "1.3" }
         - { stat: "max", e8: "7.5", e32: "24.2" }
-  size: "1.25GB"
+    - label: "CLOUD(Snapshot1-48)"
+      rows:
+        - { stat: "avg", e8: "1.5", e32: "3.3" }
+        - { stat: "min", e8: "1.2", e32: "2.5" }
+        - { stat: "max", e8: "2.5", e32: "6.2" }
+    - label: "P"
+      rows:
+        - { stat: "avg", e8: "7.3", e32: "24.2" }
+        - { stat: "min", e8: "7.3", e32: "24.1" }
+        - { stat: "max", e8: "7.3", e32: "24.2" }
+    - label: "PRECIP"
+      rows:
+        - { stat: "avg", e8: "7.3", e32: "22.8" }
+        - { stat: "min", e8: "6.3", e32: "17.8" }
+        - { stat: "max", e8: "7.5", e32: "24.1" }
+    - label: "QCLOUD"
+      rows:
+        - { stat: "avg", e8: "3.6", e32: "10.6" }
+        - { stat: "min", e8: "0.4", e32: "0.7" }
+        - { stat: "max", e8: "7.4", e32: "23.4" }
+    - label: "QICE"
+      rows:
+        - { stat: "avg", e8: "1.3", e32: "2.9" }
+        - { stat: "min", e8: "1.1", e32: "2.2" }
+        - { stat: "max", e8: "2.5", e32: "6.1" }
+    - label: "QRAIN"
+      rows:
+        - { stat: "avg", e8: "6.7", e32: "20.0" }
+        - { stat: "min", e8: "2.3", e32: "5.2" }
+        - { stat: "max", e8: "7.4", e32: "23.1" }
+    - label: "QSNOW"
+      rows:
+        - { stat: "avg", e8: "7.2", e32: "22.2" }
+        - { stat: "min", e8: "6.2", e32: "17.5" }
+        - { stat: "max", e8: "7.5", e32: "23.7" }
+    - label: "QVAPOR"
+      rows:
+        - { stat: "avg", e8: "7.4", e32: "24.2" }
+        - { stat: "min", e8: "7.4", e32: "24.2" }
+        - { stat: "max", e8: "7.4", e32: "24.2" }
+    - label: "TC"
+      rows:
+        - { stat: "avg", e8: "7.2", e32: "23.6" }
+        - { stat: "min", e8: "7.2", e32: "23.5" }
+        - { stat: "max", e8: "7.2", e32: "23.6" }
+    - label: "U"
+      rows:
+        - { stat: "avg", e8: "7.4", e32: "24.2" }
+        - { stat: "min", e8: "7.4", e32: "24.2" }
+        - { stat: "max", e8: "7.4", e32: "24.2" }
+    - label: "V"
+      rows:
+        - { stat: "avg", e8: "7.4", e32: "24.2" }
+        - { stat: "min", e8: "7.3", e32: "24.2" }
+        - { stat: "max", e8: "7.4", e32: "24.2" }
+    - label: "W"
+      rows:
+        - { stat: "avg", e8: "7.4", e32: "24.2" }
+        - { stat: "min", e8: "7.4", e32: "24.2" }
+        - { stat: "max", e8: "7.5", e32: "24.3" }
+  size: |
+    Snapshot48: 1.25GB
+    CLOUDf: 575MB
+    Pf: 4GB
+    PRECIP: 3.9GB
+    QCLOUD: 3.7GB
+    QICE: 502MB
+    QRAIN: 3.5GB
+    QSNOW: 3.9GB
+    QVAPOR: 3.9GB
+    TC: 3.6GB
+    U: 4.1GB
+    V: 4.0GB
+    W: 4.2GB
+    CLOUD_log10: 533MB
+    QCLOUD_log10: 193MB
+    QGRAUP_log10: 3GB
+    QICE_log10: 464MB
+    QRAIN_log10: 2.8GB
+    QSNOW_log10: 3.3GB
   commands:
     sz_compress: "sz -z -f -i Pf48.bin.f32 -M REL -R 1E-2 -3 500 500 100"
     sz_decompress: "sz -x -f -i Pf48.bin.f32 -3 500 500 100 -s Pf48.bin.f32.sz -a"
@@ -103,9 +182,46 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -f REL Hurricane raw-data-dir f32 500 500 100"
   links:
-    - { label: "Dataset", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500.tar.gz" }
-    - { label: "Metadata", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-template_data.txt" }
-    - { label: "Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-property.txt" }
+    - { label: "Snapshot48", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500.tar.gz" }
+    - { label: "Snapshot48-Metadata", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-template_data.txt" }
+    - { label: "Snapshot48-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-property.txt" }
+    - { label: "CLOUD(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-CLOUDf.tar.gz" }
+    - { label: "CLOUD-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-CLOUDf-property.txt" }
+    - { label: "P(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-Pf.tar.gz" }
+    - { label: "P-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-Pf-property.txt" }
+    - { label: "PRECIP(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-PRECIPf.tar.gz" }
+    - { label: "PRECIP-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-PRECIPf-property.txt" }
+    - { label: "QCLOUD(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QCLOUDf.tar.gz" }
+    - { label: "QCLOUD-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QCLOUDf-property.txt" }
+    - { label: "QICE(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QICEf.tar.gz" }
+    - { label: "QICE-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QICEf-property.txt" }
+    - { label: "QRAIN(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QRAINf.tar.gz" }
+    - { label: "QRAIN-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QRAINf-property.txt" }
+    - { label: "QSNOW(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QSNOWf.tar.gz" }
+    - { label: "QSNOW-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QSNOWf-property.txt" }
+    - { label: "QVAPOR(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QVAPORf.tar.gz" }
+    - { label: "QVAPOR-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QVAPORf-property.txt" }
+    - { label: "TC(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-TCf.tar.gz" }
+    - { label: "TC-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-TCf-property.txt" }
+    - { label: "U(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-Uf.tar.gz" }
+    - { label: "U-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-Uf-property.txt" }
+    - { label: "V(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-Vf.tar.gz" }
+    - { label: "V-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-Vf-property.txt" }
+    - { label: "W(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-Wf.tar.gz" }
+    - { label: "W-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-Wf-property.txt" }
+    - { label: "CLOUD_log10(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-CLOUD_log10.tar.gz" }
+    - { label: "CLOUD_log10-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-CLOUD_log10-property.txt" }
+    - { label: "QCLOUD_log10(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QCLOUD_log10.tar.gz" }
+    - { label: "QCLOUD_log10-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QCLOUD_log10-property.txt" }
+    - { label: "QGRAUP_log10(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QGRAUP_log10.tar.gz" }
+    - { label: "QGRAUP_log10-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QGRAUP_log10-property.txt" }
+    - { label: "QICE_log10(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QICE_log10.tar.gz" }
+    - { label: "QICE_log10-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QICE_log10-property.txt" }
+    - { label: "QRAIN_log10(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QRAIN_log10.tar.gz" }
+    - { label: "QRAIN_log10-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QRAIN_log10-property.txt" }
+    - { label: "QSNOW_log10(Snapshot1-48)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QSNOW_log10.tar.gz" }
+    - { label: "WSNOW_log10-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-QSNOW_log10-property.txt" }
+
 
 - name: "EXAFEL"
   source: "LCLS"
