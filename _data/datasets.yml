@@ -329,7 +329,7 @@
     - { label: "Dataset1(512x512x512)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512.tar.gz" }
     - { label: "Metadata1(512x512x512)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/template_data.txt" }
     - { label: "Property1(512x512x512)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512-property.txt" }
-    - { label: "Dataset2(log)(512x512x512)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512.tar.gz" }
+    - { label: "Dataset2(log)(512x512x512)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512_log.tar.gz" }
     - { label: "Metadata2(log)(512x512x512)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/template_data-log.txt" }
     - { label: "Property2(log)(512x512x512)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512-log-property.txt" }
 
