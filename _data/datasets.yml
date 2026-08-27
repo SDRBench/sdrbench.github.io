@@ -486,7 +486,8 @@
     sz_compress: "sz -f -z -i u_1024x1024x1501Re10k.f32 -M REL -R 1E-3 -3 1024 1024 1501"
     sz_decompress: "sz -f -x -i u_1024x1024x1501Re10k.f32 -s u_1024x1024x1501Re10k.f32.sz -3 1024 1024 1501 -a"
     zfp: "zfp -f -3 1024 1024 1501 -i u_1024x1024x1501Re10k.f32 -z u_1024x1024x1501Re10k.f32.zfp -o u_1024x1024x1501Re10k.f32.zfp.out -a 1E-3 -s"
-    libpressio: ""
+    libpressio: "pressio -i u_1024x1024x1501Re10k.f32 -o rel=1E-3 -d 1024 -d 1024 -d 1501 -b compressor=$COMP"
+    libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: ""
   links:
     - { label: "Dataset", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/SDRBENCH-Basilisk-Turbulence.tar.gz" }
@@ -510,9 +511,10 @@
     sz_compress: "NA"
     sz_decompress: "NA"
     zfp: "NA"
-    libpressio: "N/A"
+    libpressio: "pressio -i xgc/xgc.3d.08100.bp -T adios2 -u adios2:variable_name=dpot  -b compressor=$COMP -m size -M ratio -o rel=1e-3"
+    libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc.  This requires the libpressio-adios2 package support to be compiled and linked"
     zchecker: "NA"
-  commands_note: "The files are stored in .bp format, you need to install ADIOS to read them."
+  commands_note: "The files are stored in .bp format, you need to install ADIOS2 support to read them."
   links:
     - { label: "Dataset (Adios2)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.3d.tar.gz" }
     - { label: "Dataset (binary)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.zip" }
@@ -532,9 +534,10 @@
     sz_compress: "NA"
     sz_decompress: "NA"
     zfp: "NA"
-    libpressio: "N/A"
+    libpressio: "pressio -i -T adios1 -u adios1:varname=mhdSpec -o rel=1e-3 -b compressor=$COMP"
+    libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc.  This requires libpressio-adios1 support to be compiled and used"
     zchecker: "NA"
-  commands_note: "The files are stored in .bp format, you need to install ADIOS to read them."
+  commands_note: "The files are stored in .bp format, you need to install ADIOS1 to read them."
   links:
     - { label: "Dataset", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NSTX_GPI/nstx_data_ornl_demo.bp" }
     - { label: "Metadata", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NSTX_GPI/template_data.txt" }
