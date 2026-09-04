@@ -848,7 +848,7 @@ Dataset3: 1 GB</p>
     <span class="badge">Cosmology: particle simulation</span>
   </div>
   <div class="card-body">
-    <p class="source-info"><strong>Source:</strong> HACC team (ECP EXASKY)</p>
+    <p class="source-info"><strong>Source:</strong> HACC team (ECP EXASKY): please cite this paper ([Heitmann et al., Astrophys.J.Suppl. 252 (2021) 2, 19](https://inspirehep.net/literature/1799008)) if you are using HACC data. (<a href="https://www.alcf.anl.gov/science/case-studies/opencosmo-community-portal-cosmological-simulations">https://www.alcf.anl.gov/science/case-studies/opencosmo-community-portal-cosmological-simulations</a>)</p>
     
 
     <div class="dataset-grid">
@@ -1301,7 +1301,9 @@ Single precision, binary, little-endian</p>
       <summary>Command Examples</summary>
 <pre><code><b>SZ (Compress):</b>   sz -f -z -i u_1024x1024x1501Re10k.f32 -M REL -R 1E-3 -3 1024 1024 1501
 <b>SZ (Decompress):</b> sz -f -x -i u_1024x1024x1501Re10k.f32 -s u_1024x1024x1501Re10k.f32.sz -3 1024 1024 1501 -a
-<b>ZFP:</b>              zfp -f -3 1024 1024 1501 -i u_1024x1024x1501Re10k.f32 -z u_1024x1024x1501Re10k.f32.zfp -o u_1024x1024x1501Re10k.f32.zfp.out -a 1E-3 -s</code></pre>
+<b>ZFP:</b>              zfp -f -3 1024 1024 1501 -i u_1024x1024x1501Re10k.f32 -z u_1024x1024x1501Re10k.f32.zfp -o u_1024x1024x1501Re10k.f32.zfp.out -a 1E-3 -s
+<b>LibPressio:</b>       pressio -i u_1024x1024x1501Re10k.f32 -o rel=1E-3 -d 1024 -d 1024 -d 1501 -b compressor=$COMP
+                      where $COMP can be sz, zfp, sz3, mgard, etc.</code></pre>
     </details>
   </div>
 </div>
@@ -1342,7 +1344,7 @@ Double precision, binary, little-endian</p>
       </div>
     </div>
 
-    <div class="info-box"><p>The files are stored in .bp format, you need to install ADIOS to read them.</p></div>
+    <div class="info-box"><p>The files are stored in .bp format, you need to install ADIOS2 support to read them.</p></div>
   </div>
 </div>
 
@@ -1380,7 +1382,7 @@ Double precision, binary, little-endian</p>
       </div>
     </div>
 
-    <div class="info-box"><p>The files are stored in .bp format, you need to install ADIOS to read them.</p></div>
+    <div class="info-box"><p>The files are stored in .bp format, you need to install ADIOS1 to read them.</p></div>
   </div>
 </div>
 

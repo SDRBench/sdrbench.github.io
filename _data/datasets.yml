@@ -255,8 +255,8 @@
     - { label: "Metadata (Dataset3)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/template_data-exafel-130x1480x1552.txt" }
 
 - name: "HACC"
-  source: "HACC team (ECP EXASKY)"
-  source_url: ""
+  source: "HACC team (ECP EXASKY): please cite this paper ([Heitmann et al., Astrophys.J.Suppl. 252 (2021) 2, 19](https://inspirehep.net/literature/1799008)) if you are using HACC data."
+  source_url: "https://www.alcf.anl.gov/science/case-studies/opencosmo-community-portal-cosmological-simulations"
   type: "Cosmology: particle simulation"
   format: |
     1 snapshot: 6 fields (x, y, z, vx, vy, vz)
@@ -291,9 +291,15 @@
     - { label: "Dataset2", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size.tar.gz" }
     - { label: "Metadata2", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size-template_data.txt" }
     - { label: "Property2", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size-property.txt" }
-    #- { label: "Dataset3", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/SDRBENCH-EXASKY-HACC-data-sbig-size.tar.gz" }
+    #- { label: "Dataset3", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-ata/EXASKY/HACC/SDRBENCH-EXASKY-HACC-data-sbig-size.tar.gz" }
     #- { label: "Metadata3", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-sbig-size-template_data.txt" }
     #- { label: "Property3", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-sbig-size-property.txt" }
+    #- { label: "multi-timestep-region1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/1840.tar.gz" }
+    #- { label: "multi-timestep-region2", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/20000.tar.gz" }
+    #- { label: "multi-timestep-region3", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/24120.tar.gz" }
+    #- { label: "multi-timestep-region1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/30210.tar.gz" }
+    #- { label: "multi-timestep-region1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4507.tar.gz" }
+    #- { label: "multi-timestep-region1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4529.tar.gz" }
 
 - name: "NYX"
   source: 'Zarija Lukic (LBL, Berkeley)'
