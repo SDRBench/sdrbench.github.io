@@ -276,7 +276,14 @@
   size: |
     Dataset1: 19 GB
     Dataset2: 5 GB
-    Dataset3: 18.12GB
+    Dataset3: 18.12 GB
+    multi-timestep-region1: 13 GB
+    multi-timestep-region2: 14 GB
+    multi-timestep-region3: 13 GB
+    multi-timestep-region4: 13 GB
+    multi-timestep-region5: 13 GB
+    multi-timestep-region6: 13 GB
+
   commands:
     sz_compress: "sz -z -f -i xx.f32 -M ABS -A 0.003 -1 1073726487"
     sz_decompress: "sz -x -f -i xx.f32 -s xx.f32.sz -1 1073726487 -a"
