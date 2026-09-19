@@ -15,18 +15,19 @@ title: About
 ## Contributors & Maintainers
 
 <ul class="contributors">
-  <li><strong>F. Cappello</strong> (ANL, lead)</li>
-  <li><strong>S. Di</strong> (ANL)</li>
-  <li><strong>R. Underwood</strong> (ANL)</li>
+  <li><strong>Franck Cappello</strong> (ANL, lead)</li>
+  <li><strong>Sheng Di</strong> (ANL)</li>
+  <li><strong>Robert Underwood</strong> (ANL)</li>
   <li><strong>M. Ainsworth</strong> (Brown University)</li>
-  <li><strong>J. Bessac</strong> (ANL)</li>
+  <li><strong>Julie Bessac</strong> (ANL)</li>
   <li><strong>Martin Burtscher</strong> (Texas State University)</li>
   <li><strong>Jong Youl Choi</strong> (ORNL)</li>
   <li><strong>E. Constantinescu</strong> (ANL)</li>
-  <li><strong>H. Guo</strong> (ANL)</li>
+  <li><strong>Hanqi Guo</strong> (ANL)</li>
   <li><strong>Peter Lindstrom</strong> (LLNL)</li>
   <li><strong>Ozan Tugluk</strong> (Brown University)</li>
-  <li><strong>J. Tian</strong> (ANL)</li>
+  <li><strong>Jiannan Tian</strong> (ANL)</li>
+  <li><strong>Jiajun Huang</strong> (USF)</li>
 </ul>
 
 ## Dataset Acknowledgments
