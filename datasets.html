@@ -461,8 +461,9 @@
         <div class="detail-group">
           <h4>Format</h4>
           <p>Dataset1: 79 fields, 2D, 1800x3600<br>
-Dataset2: 1 field, 3D, 26x1800x3600<br>
-Both single precision, binary</p>
+(the cleared version has 77 fields: SFCLDICE and SFCLDLIQ are not included)<br>
+Dataset2: 33 fields, 3D, 26x1800x3600<br>
+Both single precision, binary, little-endian</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -603,7 +604,10 @@ Dataset3: 2.4 GB</p>
           <h4>Format</h4>
           <p>13 fields, 3D, 100x500x500<br>
 Single precision, binary<br>
-(cleared dataset by replacing background by 0)</p>
+(cleared dataset by replacing background by 0)<br>
+Snapshot48 archive: the 13 fields of time step 48 plus 7 log10-transformed fields (e.g. CLOUDf48.log10.bin.f32)<br>
+Per-field archives: 48 time steps each (e.g. Pf01.f32 ... Pf48.f32; log10 archives: CLOUDf01.bin.log10.f32 ...)<br>
+The QCLOUDf archive also contains the QGRAUPf01-48 fields</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -796,9 +800,10 @@ QSNOW_log10: 3.3GB</p>
       <div>
         <div class="detail-group">
           <h4>Format</h4>
-          <p>1 field, 2D<br>
-Single precision<br>
-HDF5 and binary</p>
+          <p>Dataset1: 3 files (raw, dark, calib-fde), 10x32x185x388, unsigned 16-bit integer (*.u16)<br>
+Dataset2: 1 field, 986x32x185x388, single precision<br>
+Dataset3: 1 field, 130x1480x1552, single precision, plus peak positions (130x2048, double) and peak counts (130, int64)<br>
+Binary, little-endian (events x panels x rows x columns)</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -857,7 +862,9 @@ Dataset3: 1 GB</p>
           <h4>Format</h4>
           <p>1 snapshot: 6 fields (x, y, z, vx, vy, vz)<br>
 Each field stored separately<br>
-Single precision, binary, little-endian</p>
+Single precision, binary, little-endian<br>
+Dataset3: one region of time step 499, coordinates only (x, y, z)<br>
+multi-timestep regions: x, y, z of one region over about 100 time steps (the particle count varies per step), plus particle IDs (ID.u64, unsigned 64-bit)</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -909,7 +916,7 @@ multi-timestep-region6: 13 GB</p>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/20000.tar.gz">multi-timestep-region2</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/24120.tar.gz">multi-timestep-region3</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/30210.tar.gz">multi-timestep-region4</a>
-<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4507.tar.gz">multi-timestep-region5</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4507.tar.gz">multi-timestep-region5 (currently unavailable, HTTP 404)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4529.tar.gz">multi-timestep-region6</a>
       </div>
     </div>
@@ -1007,7 +1014,8 @@ Dataset1(log): 2.7 GB</p>
         <div class="detail-group">
           <h4>Format</h4>
           <p>3 fields, 1D<br>
-Double precision, binary, little-endian</p>
+Double precision (*.bin.d64), binary, little-endian<br>
+Single-precision copies (*.bin.f32) and a reader (readbin.cpp) are also included</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -1108,8 +1116,10 @@ Single precision, binary, little-endian</p>
       <div>
         <div class="detail-group">
           <h4>Format</h4>
-          <p>1 field, 288 orbitals, 3D, 69x69x115<br>
-Single precision, binary, little-endian</p>
+          <p>1 field, 288 orbitals, each a 3D 115x69x69 grid<br>
+Single precision, binary, little-endian<br>
+The archive holds the original layout, einspline_115_69_69_288.f32 (115x69x69x288, orbital index fastest).<br>
+The command examples use the preconditioned layout einspline_288_115_69_69.pre.f32 (288x115x69x69), a transpose of the original that is smoother in space; it is not included in the archive.</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -1161,8 +1171,9 @@ Single precision, binary, little-endian</p>
       <div>
         <div class="detail-group">
           <h4>Format</h4>
-          <p>3D, 7 fields, each field is 256x384x384<br>
-Double precision, binary, little-endian</p>
+          <p>Small: 3D, 7 fields, each field is 256x384x384, double precision<br>
+Big: 3D, 1 field (density), 3072x3072x3072, single precision, stored as 96 slabs density-00.f32 ... density-95.f32 of 32x3072x3072<br>
+Binary, little-endian</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -1275,8 +1286,9 @@ Double precision, binary, little-endian</p>
       <div>
         <div class="detail-group">
           <h4>Format</h4>
-          <p>4 fields, 3D<br>
-1501x1024x1024 & 1001x2048x2048<br>
+          <p>4 fields: velocity components u and v of two time-varying 2D fields<br>
+1501x1024x1024 & 1001x2048x2048 (time steps x 2D grid)<br>
+File names list the dimensions fastest first (WIDTHxHEIGHTxTIMESTEPS):<br>
 u_1024x1024x1501Re10k.f32<br>
 v_1024x1024x1501Re10k.f32<br>
 u_2048x2048x1001Re10k.f32<br>

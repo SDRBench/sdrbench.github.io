@@ -4,8 +4,9 @@
   type: "Climate simulation"
   format: |
     Dataset1: 79 fields, 2D, 1800x3600
-    Dataset2: 1 field, 3D, 26x1800x3600
-    Both single precision, binary
+    (the cleared version has 77 fields: SFCLDICE and SFCLDLIQ are not included)
+    Dataset2: 33 fields, 3D, 26x1800x3600
+    Both single precision, binary, little-endian
   entropy:
     - label: ""
       rows:
@@ -88,6 +89,9 @@
     13 fields, 3D, 100x500x500
     Single precision, binary
     (cleared dataset by replacing background by 0)
+    Snapshot48 archive: the 13 fields of time step 48 plus 7 log10-transformed fields (e.g. CLOUDf48.log10.bin.f32)
+    Per-field archives: 48 time steps each (e.g. Pf01.f32 ... Pf48.f32; log10 archives: CLOUDf01.bin.log10.f32 ...)
+    The QCLOUDf archive also contains the QGRAUPf01-48 fields
   entropy:
     - label: "Snapshot48(all 13 fields)"
       rows:
@@ -228,9 +232,10 @@
   source_url: ""
   type: "Images from the LCLS instrument"
   format: |
-    1 field, 2D
-    Single precision
-    HDF5 and binary
+    Dataset1: 3 files (raw, dark, calib-fde), 10x32x185x388, unsigned 16-bit integer (*.u16)
+    Dataset2: 1 field, 986x32x185x388, single precision
+    Dataset3: 1 field, 130x1480x1552, single precision, plus peak positions (130x2048, double) and peak counts (130, int64)
+    Binary, little-endian (events x panels x rows x columns)
   entropy:
     - label: ""
       rows:
@@ -262,6 +267,8 @@
     1 snapshot: 6 fields (x, y, z, vx, vy, vz)
     Each field stored separately
     Single precision, binary, little-endian
+    Dataset3: one region of time step 499, coordinates only (x, y, z)
+    multi-timestep regions: x, y, z of one region over about 100 time steps (the particle count varies per step), plus particle IDs (ID.u64, unsigned 64-bit)
   entropy:
     - label: "Dataset1"
       rows:
@@ -305,7 +312,7 @@
     - { label: "multi-timestep-region2", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/20000.tar.gz" }
     - { label: "multi-timestep-region3", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/24120.tar.gz" }
     - { label: "multi-timestep-region4", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/30210.tar.gz" }
-    - { label: "multi-timestep-region5", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4507.tar.gz" }
+    - { label: "multi-timestep-region5 (currently unavailable, HTTP 404)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4507.tar.gz" }
     - { label: "multi-timestep-region6", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4529.tar.gz" }
 
 - name: "NYX"
@@ -352,7 +359,8 @@
   type: "Two-electron repulsion integrals computed over Gaussian-type orbital basis sets"
   format: |
     3 fields, 1D
-    Double precision, binary, little-endian
+    Double precision (*.bin.d64), binary, little-endian
+    Single-precision copies (*.bin.f32) and a reader (readbin.cpp) are also included
   entropy: []
   size: "16GB"
   commands:
@@ -400,8 +408,10 @@
   source_url: ""
   type: "Many-body ab initio Quantum Monte Carlo (electronic structure of atoms, molecules, and solids)"
   format: |
-    1 field, 288 orbitals, 3D, 69x69x115
+    1 field, 288 orbitals, each a 3D 115x69x69 grid
     Single precision, binary, little-endian
+    The archive holds the original layout, einspline_115_69_69_288.f32 (115x69x69x288, orbital index fastest).
+    The command examples use the preconditioned layout einspline_288_115_69_69.pre.f32 (288x115x69x69), a transpose of the original that is smoother in space; it is not included in the archive.
   entropy:
     - label: ""
       rows:
@@ -424,8 +434,9 @@
   source_url: ""
   type: "Hydrodynamics code for large turbulence simulations"
   format: |
-    3D, 7 fields, each field is 256x384x384
-    Double precision, binary, little-endian
+    Small: 3D, 7 fields, each field is 256x384x384, double precision
+    Big: 3D, 1 field (density), 3072x3072x3072, single precision, stored as 96 slabs density-00.f32 ... density-95.f32 of 32x3072x3072
+    Binary, little-endian
   entropy:
     - label: ""
       rows:
@@ -481,8 +492,9 @@
   source_url: "http://basilisk.fr/"
   type: "2D decaying turbulence simulation"
   format: |
-    4 fields, 3D
-    1501x1024x1024 & 1001x2048x2048
+    4 fields: velocity components u and v of two time-varying 2D fields
+    1501x1024x1024 & 1001x2048x2048 (time steps x 2D grid)
+    File names list the dimensions fastest first (WIDTHxHEIGHTxTIMESTEPS):
     u_1024x1024x1501Re10k.f32
     v_1024x1024x1501Re10k.f32
     u_2048x2048x1001Re10k.f32

@@ -14,6 +14,8 @@ title: Datasets
 
 *Note: This table will be augmented with metrics that matter for users of these datasets as well as recommended settings for error control (lossy compression).*
 
+*Dimensions in the Format sections are listed slowest-varying first (C order, as in numpy), e.g. 26x1800x3600 is 26 slices of 1800x3600; the command examples pass them to the tools fastest-varying first (e.g. `-3 3600 1800 26`).*
+
 {% for ds in site.data.datasets %}
 <div class="card" id="{{ ds.name | slugify }}">
   <div class="card-header">
