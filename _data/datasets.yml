@@ -27,6 +27,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -f REL CESM-ATM raw-data-dir f32 3600 1800"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/cesm-atm" }
     - { label: "Dataset1 (raw)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-1800x3600.tar.gz" }
     - { label: "Dataset1 (cleared)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-cleared-1800x3600.tar.gz" }
     - { label: "Dataset2 (raw)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-26x1800x3600.tar.gz" }
@@ -71,6 +72,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -f REL EXAALT raw-data-dir f32 2869440"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/exaalt" }
     - { label: "Dataset1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440.tar.gz" }
     - { label: "Metadata1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440-template_data.txt" }
     - { label: "Property1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440-property.txt" }
@@ -186,6 +188,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -f REL Hurricane raw-data-dir f32 500 500 100"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/hurricane-isabel" }
     - { label: "Snapshot48", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500.tar.gz" }
     - { label: "Snapshot48-Metadata", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-template_data.txt" }
     - { label: "Snapshot48-Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-property.txt" }
@@ -252,6 +255,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -f REL EXAFEL raw-data-dir f32 388 5837120"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/exafel" }
     - { label: "Dataset1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-10x32x185x388.tar.gz" }
     - { label: "Dataset2", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-986x32x185x388.tar.gz" }
     - { label: "Metadata", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/template_data.txt" }
@@ -299,6 +303,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -f ABS HACC raw-data-dir f32 1073726487"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/hacc" }
     - { label: "Dataset1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size.tar.gz" }
     - { label: "Metadata1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size-template_data.txt" }
     - { label: "Property1", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size-property.txt" }
@@ -346,6 +351,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -f REL NYX raw-data-dir f32 512 512 512"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/nyx" }
     - { label: "Dataset1(512x512x512)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512.tar.gz" }
     - { label: "Metadata1(512x512x512)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/template_data.txt" }
     - { label: "Property1(512x512x512)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512-property.txt" }
@@ -371,6 +377,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -d REL NWCHEM raw-data-dir d64 102953248"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/nwchem" }
     - { label: "Dataset", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/SDRBENCH-NWChem-dataset.tar.gz" }
     - { label: "Metadata", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/template_data.txt" }
     - { label: "Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/SDRBENCH-NWChem-dataset-property.txt" }
@@ -398,6 +405,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -f REL SCALE-LETKF raw-data-dir f32 1200 1200 98"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/scale-letkf" }
     - { label: "Dataset", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200.tar.gz" }
     - { label: "Metadata", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/template_data.txt" }
     - { label: "Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200-property.txt" }
@@ -425,6 +433,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -f REL QMCPack raw-data-dir f32 69 69 33120"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/qmcpack" }
     - { label: "Dataset", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/SDRBENCH-QMCPack.tar.gz" }
     - { label: "Metadata", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/template_data.txt" }
     - { label: "Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/SDRBENCH-QMCPACK-115x69x69x288-property.txt" }
@@ -454,6 +463,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -d REL Miranda raw-data-dir d64 384 384 256"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/miranda" }
     - { label: "Dataset (Small)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-256x384x384.tar.gz" }
     - { label: "Metadata (Small)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/template_data-miranda-256x384x384.txt" }
     - { label: "Property (Small)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-256x384x384-property.txt" }
@@ -483,6 +493,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: "./runZCCase.sh -f REL S3D raw-data-dir f32 500 500 500"
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/s3d" }
     - { label: "Dataset", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/SDRBENCH-S3D.tar.gz" }
     - { label: "Metadata", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/template.txt" }
     - { label: "Property", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/SDRBENCH-S3D-property.txt" }
@@ -515,6 +526,7 @@
     libpressio_note: "where $COMP can be sz, zfp, sz3, mgard, etc."
     zchecker: ""
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/basilisk-turbulence" }
     - { label: "Dataset", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/SDRBENCH-Basilisk-Turbulence.tar.gz" }
     - { label: "Metadata1 (1501x1024x1024)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/metadata_1024x1024x1501Re10k.txt" }
     - { label: "Metadata2 (1001x2048x2048)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/metadata_2048x2048x1001Re10k.txt" }
@@ -541,6 +553,7 @@
     zchecker: "NA"
   commands_note: "The files are stored in .bp format, you need to install ADIOS2 support to read them."
   links:
+    - { label: "Hugging Face", url: "https://huggingface.co/datasets/sdrbench/xgc" }
     - { label: "Dataset (Adios2)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.3d.tar.gz" }
     - { label: "Dataset (binary)", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.zip" }
     - { label: "Metadata", url: "https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/template_data.txt" }

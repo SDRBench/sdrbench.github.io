@@ -12,6 +12,13 @@ title: Tools
 
 <div class="content" markdown="1">
 
+## Dataset Access
+
+| Tool | Link |
+|------|------|
+| sdrbench (Python): SDRBench datasets as numpy arrays, from the Hugging Face mirror or the Globus archives | [https://github.com/szcompressor/sdrbench](https://github.com/szcompressor/sdrbench) · `pip install sdrbench` |
+| SDRBench on Hugging Face | [https://huggingface.co/sdrbench](https://huggingface.co/sdrbench) |
+
 ## Lossy Compressors
 
 | Compressor | Link |
