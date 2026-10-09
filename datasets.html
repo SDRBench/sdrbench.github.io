@@ -442,9 +442,24 @@
 <div class="content">
 
 <p><em>
-<strong>FORMAT:</strong> Describes the data organization, including the number of fields in each data file and the data dimensions.<br>
+<strong>FORMAT:</strong> Describes the data organization, including the number of fields in each data file and the data dimensions. Dimensions are listed slowest-varying first (C order, as in numpy), e.g. 26x1800x3600 is 26 slices of 1800x3600; the command examples pass them to the tools fastest-varying first (e.g. <code>-3 3600 1800 26</code>).<br>
 <strong>SIZE:</strong> Indicates the file size in bytes. Since most datasets are distributed as compressed .tar.gz archives, SIZE typically refers to the size of the corresponding .tar.gz file.
 </em></p>
+
+<div class="card" id="python-access">
+  <div class="card-body">
+    <p><strong>Python and Hugging Face.</strong> All datasets below except NSTX GPI are also mirrored, byte for byte, on
+    <a href="https://huggingface.co/sdrbench">Hugging Face</a>, and can be loaded as numpy arrays with the
+    <a href="https://pypi.org/project/sdrbench/"><code>sdrbench</code></a> package. It downloads single files from Hugging Face,
+    checks them against their sha256, and falls back to the archives listed here:</p>
+<pre><code>pip install sdrbench
+
+import sdrbench
+x = sdrbench.dataset("cesm-atm")["CLDHGH"]     # numpy array, shape (1800, 3600)</code></pre>
+    <p>Every field comes with its dtype and C-order shape; see
+    <a href="https://github.com/szcompressor/sdrbench">szcompressor/sdrbench</a> for the dataset, variant and field names.</p>
+  </div>
+</div>
 
 
 <div class="card" id="cesm-atm">
@@ -461,8 +476,9 @@
         <div class="detail-group">
           <h4>Format</h4>
           <p>Dataset1: 79 fields, 2D, 1800x3600<br>
-Dataset2: 1 field, 3D, 26x1800x3600<br>
-Both single precision, binary</p>
+(the cleared version has 77 fields: SFCLDICE and SFCLDLIQ are not included)<br>
+Dataset2: 33 fields, 3D, 26x1800x3600<br>
+Both single precision, binary, little-endian</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -488,7 +504,8 @@ Dataset2: 17GB<br>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-1800x3600.tar.gz">Dataset1 (raw)</a>
+        <a href="https://huggingface.co/datasets/sdrbench/cesm-atm">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-1800x3600.tar.gz">Dataset1 (raw)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-cleared-1800x3600.tar.gz">Dataset1 (cleared)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/SDRBENCH-CESM-ATM-26x1800x3600.tar.gz">Dataset2 (raw)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/CESM-ATM/template_data.txt">Metadata</a>
@@ -564,7 +581,8 @@ Dataset3: 2.4 GB</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440.tar.gz">Dataset1</a>
+        <a href="https://huggingface.co/datasets/sdrbench/exaalt">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440.tar.gz">Dataset1</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440-template_data.txt">Metadata1</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-2869440-property.txt">Property1</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAALT/SDRBENCH-EXAALT-copper.tar.gz">Dataset2</a>
@@ -603,7 +621,10 @@ Dataset3: 2.4 GB</p>
           <h4>Format</h4>
           <p>13 fields, 3D, 100x500x500<br>
 Single precision, binary<br>
-(cleared dataset by replacing background by 0)</p>
+(cleared dataset by replacing background by 0)<br>
+Snapshot48 archive: the 13 fields of time step 48 plus 7 log10-transformed fields (e.g. CLOUDf48.log10.bin.f32)<br>
+Per-field archives: 48 time steps each (e.g. Pf01.f32 ... Pf48.f32; log10 archives: CLOUDf01.bin.log10.f32 ...)<br>
+The QCLOUDf archive also contains the QGRAUPf01-48 fields</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -729,7 +750,8 @@ QSNOW_log10: 3.3GB</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500.tar.gz">Snapshot48</a>
+        <a href="https://huggingface.co/datasets/sdrbench/hurricane-isabel">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500.tar.gz">Snapshot48</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-template_data.txt">Snapshot48-Metadata</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-100x500x500-property.txt">Snapshot48-Property</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Hurricane-ISABEL/SDRBENCH-Hurricane-ISABEL-CLOUDf.tar.gz">CLOUD(Snapshot1-48)</a>
@@ -796,9 +818,10 @@ QSNOW_log10: 3.3GB</p>
       <div>
         <div class="detail-group">
           <h4>Format</h4>
-          <p>1 field, 2D<br>
-Single precision<br>
-HDF5 and binary</p>
+          <p>Dataset1: 3 files (raw, dark, calib-fde), 10x32x185x388, unsigned 16-bit integer (*.u16)<br>
+Dataset2: 1 field, 986x32x185x388, single precision<br>
+Dataset3: 1 field, 130x1480x1552, single precision, plus peak positions (130x2048, double) and peak counts (130, int64)<br>
+Binary, little-endian (events x panels x rows x columns)</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -821,7 +844,8 @@ Dataset3: 1 GB</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-10x32x185x388.tar.gz">Dataset1</a>
+        <a href="https://huggingface.co/datasets/sdrbench/exafel">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-10x32x185x388.tar.gz">Dataset1</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-986x32x185x388.tar.gz">Dataset2</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/template_data.txt">Metadata</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXAFEL/SDRBENCH-EXAFEL-986x32x185x388-property.txt">Property</a>
@@ -857,7 +881,9 @@ Dataset3: 1 GB</p>
           <h4>Format</h4>
           <p>1 snapshot: 6 fields (x, y, z, vx, vy, vz)<br>
 Each field stored separately<br>
-Single precision, binary, little-endian</p>
+Single precision, binary, little-endian<br>
+Dataset3: one region of time step 499, coordinates only (x, y, z)<br>
+multi-timestep regions: x, y, z of one region over about 100 time steps (the particle count varies per step), plus particle IDs (ID.u64, unsigned 64-bit)</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -896,7 +922,8 @@ multi-timestep-region6: 13 GB</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size.tar.gz">Dataset1</a>
+        <a href="https://huggingface.co/datasets/sdrbench/hacc">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size.tar.gz">Dataset1</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size-template_data.txt">Metadata1</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-big-size-property.txt">Property1</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/EXASKY-HACC-data-medium-size.tar.gz">Dataset2</a>
@@ -909,7 +936,7 @@ multi-timestep-region6: 13 GB</p>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/20000.tar.gz">multi-timestep-region2</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/24120.tar.gz">multi-timestep-region3</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/30210.tar.gz">multi-timestep-region4</a>
-<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4507.tar.gz">multi-timestep-region5</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4507.tar.gz">multi-timestep-region5 (currently unavailable, HTTP 404)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/HACC/multi-timesteps/4529.tar.gz">multi-timestep-region6</a>
       </div>
     </div>
@@ -972,7 +999,8 @@ Dataset1(log): 2.7 GB</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512.tar.gz">Dataset1(512x512x512)</a>
+        <a href="https://huggingface.co/datasets/sdrbench/nyx">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512.tar.gz">Dataset1(512x512x512)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/template_data.txt">Metadata1(512x512x512)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512-property.txt">Property1(512x512x512)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/EXASKY/NYX/SDRBENCH-EXASKY-NYX-512x512x512_log.tar.gz">Dataset2(log)(512x512x512)</a>
@@ -1007,7 +1035,8 @@ Dataset1(log): 2.7 GB</p>
         <div class="detail-group">
           <h4>Format</h4>
           <p>3 fields, 1D<br>
-Double precision, binary, little-endian</p>
+Double precision (*.bin.d64), binary, little-endian<br>
+Single-precision copies (*.bin.f32) and a reader (readbin.cpp) are also included</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -1021,7 +1050,8 @@ Double precision, binary, little-endian</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/SDRBENCH-NWChem-dataset.tar.gz">Dataset</a>
+        <a href="https://huggingface.co/datasets/sdrbench/nwchem">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/SDRBENCH-NWChem-dataset.tar.gz">Dataset</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/template_data.txt">Metadata</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/NWChem/SDRBENCH-NWChem-dataset-property.txt">Property</a>
       </div>
@@ -1076,7 +1106,8 @@ Single precision, binary, little-endian</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200.tar.gz">Dataset</a>
+        <a href="https://huggingface.co/datasets/sdrbench/scale-letkf">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200.tar.gz">Dataset</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/template_data.txt">Metadata</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200-property.txt">Property</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/SCALE_LETKF/SDRBENCH-SCALE-98x1200x1200_log.tar.gz">Dataset2 (log-scale)</a>
@@ -1108,8 +1139,10 @@ Single precision, binary, little-endian</p>
       <div>
         <div class="detail-group">
           <h4>Format</h4>
-          <p>1 field, 288 orbitals, 3D, 69x69x115<br>
-Single precision, binary, little-endian</p>
+          <p>1 field, 288 orbitals, each a 3D 115x69x69 grid<br>
+Single precision, binary, little-endian<br>
+The archive holds the original layout, einspline_115_69_69_288.f32 (115x69x69x288, orbital index fastest).<br>
+The command examples use the preconditioned layout einspline_288_115_69_69.pre.f32 (288x115x69x69), a transpose of the original that is smoother in space; it is not included in the archive.</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -1130,7 +1163,8 @@ Single precision, binary, little-endian</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/SDRBENCH-QMCPack.tar.gz">Dataset</a>
+        <a href="https://huggingface.co/datasets/sdrbench/qmcpack">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/SDRBENCH-QMCPack.tar.gz">Dataset</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/template_data.txt">Metadata</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/QMCPACK/SDRBENCH-QMCPACK-115x69x69x288-property.txt">Property</a>
       </div>
@@ -1161,8 +1195,9 @@ Single precision, binary, little-endian</p>
       <div>
         <div class="detail-group">
           <h4>Format</h4>
-          <p>3D, 7 fields, each field is 256x384x384<br>
-Double precision, binary, little-endian</p>
+          <p>Small: 3D, 7 fields, each field is 256x384x384, double precision<br>
+Big: 3D, 1 field (density), 3072x3072x3072, single precision, stored as 96 slabs density-00.f32 ... density-95.f32 of 32x3072x3072<br>
+Binary, little-endian</p>
         </div>
         <div class="detail-group">
           <h4>Size</h4>
@@ -1186,7 +1221,8 @@ Big (3072x3072x3072): 106GB</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-256x384x384.tar.gz">Dataset (Small)</a>
+        <a href="https://huggingface.co/datasets/sdrbench/miranda">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-256x384x384.tar.gz">Dataset (Small)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/template_data-miranda-256x384x384.txt">Metadata (Small)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-256x384x384-property.txt">Property (Small)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Miranda/SDRBENCH-Miranda-3072x3072x3072.tar.gz">Dataset (Big)</a>
@@ -1244,7 +1280,8 @@ Double precision, binary, little-endian</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/SDRBENCH-S3D.tar.gz">Dataset</a>
+        <a href="https://huggingface.co/datasets/sdrbench/s3d">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/SDRBENCH-S3D.tar.gz">Dataset</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/template.txt">Metadata</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/S3D/SDRBENCH-S3D-property.txt">Property</a>
       </div>
@@ -1275,8 +1312,9 @@ Double precision, binary, little-endian</p>
       <div>
         <div class="detail-group">
           <h4>Format</h4>
-          <p>4 fields, 3D<br>
-1501x1024x1024 & 1001x2048x2048<br>
+          <p>4 fields: velocity components u and v of two time-varying 2D fields<br>
+1501x1024x1024 & 1001x2048x2048 (time steps x 2D grid)<br>
+File names list the dimensions fastest first (WIDTHxHEIGHTxTIMESTEPS):<br>
 u_1024x1024x1501Re10k.f32<br>
 v_1024x1024x1501Re10k.f32<br>
 u_2048x2048x1001Re10k.f32<br>
@@ -1304,7 +1342,8 @@ Single precision, binary, little-endian</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/SDRBENCH-Basilisk-Turbulence.tar.gz">Dataset</a>
+        <a href="https://huggingface.co/datasets/sdrbench/basilisk-turbulence">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/SDRBENCH-Basilisk-Turbulence.tar.gz">Dataset</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/metadata_1024x1024x1501Re10k.txt">Metadata1 (1501x1024x1024)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/metadata_2048x2048x1001Re10k.txt">Metadata2 (1001x2048x2048)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/Basilisk-Turbulence/README.txt">README</a>
@@ -1353,7 +1392,8 @@ Double precision, binary, little-endian</p>
     <div class="detail-group">
       <h4>Download Links</h4>
       <div class="download-links">
-        <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.3d.tar.gz">Dataset (Adios2)</a>
+        <a href="https://huggingface.co/datasets/sdrbench/xgc">Hugging Face</a>
+<a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.3d.tar.gz">Dataset (Adios2)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/xgc.zip">Dataset (binary)</a>
 <a href="https://g-d0cd3f.fd635.8443.data.globus.org/raw-data/XGC/template_data.txt">Metadata</a>
       </div>

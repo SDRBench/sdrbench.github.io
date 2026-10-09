@@ -657,9 +657,24 @@ def build_datasets_page(datasets):
 <div class="content">
 
 <p><em>
-<strong>FORMAT:</strong> Describes the data organization, including the number of fields in each data file and the data dimensions.<br>
+<strong>FORMAT:</strong> Describes the data organization, including the number of fields in each data file and the data dimensions. Dimensions are listed slowest-varying first (C order, as in numpy), e.g. 26x1800x3600 is 26 slices of 1800x3600; the command examples pass them to the tools fastest-varying first (e.g. <code>-3 3600 1800 26</code>).<br>
 <strong>SIZE:</strong> Indicates the file size in bytes. Since most datasets are distributed as compressed .tar.gz archives, SIZE typically refers to the size of the corresponding .tar.gz file.
 </em></p>
+
+<div class="card" id="python-access">
+  <div class="card-body">
+    <p><strong>Python and Hugging Face.</strong> All datasets below except NSTX GPI are also mirrored, byte for byte, on
+    <a href="https://huggingface.co/sdrbench">Hugging Face</a>, and can be loaded as numpy arrays with the
+    <a href="https://pypi.org/project/sdrbench/"><code>sdrbench</code></a> package. It downloads single files from Hugging Face,
+    checks them against their sha256, and falls back to the archives listed here:</p>
+<pre><code>pip install sdrbench
+
+import sdrbench
+x = sdrbench.dataset("cesm-atm")["CLDHGH"]     # numpy array, shape (1800, 3600)</code></pre>
+    <p>Every field comes with its dtype and C-order shape; see
+    <a href="https://github.com/szcompressor/sdrbench">szcompressor/sdrbench</a> for the dataset, variant and field names.</p>
+  </div>
+</div>
 
 {cards}
 

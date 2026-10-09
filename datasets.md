@@ -12,7 +12,25 @@ title: Datasets
 
 <div class="content">
 
+<div class="card" id="python-access">
+  <div class="card-body" markdown="1">
+
+**Python and Hugging Face.** All datasets below except NSTX GPI are also mirrored, byte for byte, on [Hugging Face](https://huggingface.co/sdrbench), and can be loaded as numpy arrays with the [`sdrbench`](https://pypi.org/project/sdrbench/) package. It downloads single files from Hugging Face, checks them against their sha256, and falls back to the archives listed here:
+
+```python
+# pip install sdrbench
+import sdrbench
+x = sdrbench.dataset("cesm-atm")["CLDHGH"]     # numpy array, shape (1800, 3600)
+```
+
+Every field comes with its dtype and C-order shape; see [szcompressor/sdrbench](https://github.com/szcompressor/sdrbench) for the dataset, variant and field names.
+
+  </div>
+</div>
+
 *Note: This table will be augmented with metrics that matter for users of these datasets as well as recommended settings for error control (lossy compression).*
+
+*Dimensions in the Format sections are listed slowest-varying first (C order, as in numpy), e.g. 26x1800x3600 is 26 slices of 1800x3600; the command examples pass them to the tools fastest-varying first (e.g. `-3 3600 1800 26`).*
 
 {% for ds in site.data.datasets %}
 <div class="card" id="{{ ds.name | slugify }}">
